@@ -1,0 +1,111 @@
+/* cSpell:disable */
+
+@use 'sass:math';
+@use './variables' as *;
+
+// %======================== FUNCTIONS ========================% //
+
+// %------------ converts a number to fixed decimals ------------% //
+@function toFixed($value, $decimals) {
+  $nthPowerOfTen: math.pow(10, $decimals);
+  @return calc(math.round($value * $nthPowerOfTen) / $nthPowerOfTen);
+}
+
+// %======================== CONVERT PX TO VW ========================% //
+// % converts px to vw according to custom viewport width
+@function toVW($value, $vp) {
+  $convertedValue: calc($value/$vp*100vw);
+  @return toFixed($convertedValue, 3);
+}
+
+// %------------ adapt to custom viewport width ------------% //
+// % (viewport width max)
+@function vwm($max, $min, $vp) {
+  @return max(toVW($max, $vp), $min);
+}
+
+// % adapt to full HD viewport width (1920px)
+@function fhd($max, $min: null) {
+  @if $min ==null {
+    @return vwm($max, $max, $FULLHD_WIDTH);
+  }
+
+  @return vwm($max, $min, $FULLHD_WIDTH);
+}
+
+// // % adapt to desktop viewport width (CONST) (1440px)
+// @function const($const) {
+//   @return vwm($const, $const, $DESK_WIDTH);
+// }
+
+// % adapt to desktop viewport width (1440px)
+@function desk($max, $min: null) {
+  @if $min ==null {
+    @return vwm($max, $max, $DESK_WIDTH);
+  }
+
+  @return vwm($max, $min, $DESK_WIDTH);
+}
+
+// % adapt to laptop viewport width (1024px)
+@function lap($max, $min) {
+  @return vwm($max, $min, $LAP_WIDTH);
+}
+
+// % adapt to tablet viewport width (834px or another)
+@function tab($max, $min) {
+  @return vwm($max, $min, $TAB_WIDTH);
+}
+
+// % adapt to middle viewport width (600px or another)
+@function mid($max, $min) {
+  @return vwm($max, $min, $MID_WIDTH);
+}
+
+// % adapt to middle viewport width (600px or another)
+@function mob($max, $min) {
+  @return vwm($max, $min, $MOB_WIDTH);
+}
+
+// %------------------------ negative ------------------------% //
+@function neg($value) {
+  @return calc(-1 * $value);
+}
+
+
+// %======================== CONVERT PX TO VH ========================% //
+// % converts px to vw according to custom viewport width
+@function toDVH($value, $vp) {
+  $convertedValue: calc($value/$vp*100dvh);
+  @return toFixed($convertedValue, 3);
+}
+
+@function toLVH($value, $vp) {
+  $convertedValue: calc($value/$vp*100lvh);
+  @return toFixed($convertedValue, 3);
+}
+
+@function toSVH($value, $vp) {
+  $convertedValue: calc($value/$vp*100svh);
+  @return toFixed($convertedValue, 3);
+}
+
+// %------------ adapt to custom viewport height ------------% //
+// % (viewport height max)
+@function dvhm($max, $min, $vph) {
+  @return max(toVH($max, $vph), $min);
+}
+
+// %------------ adapt to custom vw and vh ------------% //
+@function vwhm($initialValue, $minWidth, $minHeight, $viewportWidth, $viewportHeight) {
+
+  $adaptedToCustomMediaQuery: vwm($initialValue, $minWidth, $viewportWidth);
+  $adaptedToCustomViewportHeight: dvhm($initialValue, $minHeight, $viewportHeight);
+
+  @return min($adaptedToCustomMediaQuery, $adaptedToCustomViewportHeight);
+}
+
+/*% // %------------------ adapt value ------------------% // %*/
+@function adaptValue($value) {
+  @return vwhm($value, max(toVH($value, $DESK_WIDTH), $value), 0, $DESK_WIDTH, $DESK_HEIGHT);
+}

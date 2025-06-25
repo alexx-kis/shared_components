@@ -1,0 +1,151 @@
+@use './variables' as *;
+
+// %======================== MIXINS ========================% //
+
+// %------------ square ------------% //
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+// %------------ circle ------------% //
+@mixin circle($size) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+}
+
+// %------------ adapt property ------------% //
+@mixin adapt($property, $desk, $tab, $mob) {
+  #{$property}: desk($desk, $tab);
+
+  @media (width <=$TAB_WIDTH) {
+    #{$property}: tab($tab, $mob);
+  }
+}
+
+// %------------ hide scrollbar ------------% //
+@mixin hide-scrollbar {
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari, Opera
+  }
+
+  -ms-overflow-style: none; // IE and Edge 
+  scrollbar-width: none; // Firefox
+}
+
+// %------------ normalize font ------------% //
+// if it is bolder than needed
+@mixin normalize-font {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: never;
+}
+
+// %------------ line clamp ------------% //
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// %------------ autoAlpha ------------% // 
+@mixin autoAlpha0 {
+  visibility: hidden;
+  opacity: 0;
+}
+
+// %------------ media queries ------------% // 
+@mixin DESKTOP() {
+  @media (max-width: $DESK_WIDTH) {
+    @content;
+  }
+}
+
+@mixin LAPTOP() {
+  @media (max-width: $LAP_WIDTH) {
+    @content;
+  }
+}
+
+@mixin TABLET() {
+  @media (max-width: $TAB_WIDTH) {
+    @content;
+  }
+}
+
+@mixin MIDDLE() {
+  @media (max-width: $MID_WIDTH) {
+    @content;
+  }
+}
+
+@mixin MOBILE() {
+  @media (max-width: $MOB_WIDTH) {
+    @content;
+  }
+}
+
+@mixin HOVER() {
+  @media (hover:hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin ACTIVE() {
+  &:active {
+    @content;
+  }
+}
+
+// %------------ border-radii ------------% //
+@mixin border-radius-top-left($value) {
+  border-radius: $value 0 0 0;
+}
+
+@mixin border-radius-top-right($value) {
+  border-radius: 0 $value 0 0;
+}
+
+@mixin border-radius-bottom-right($value) {
+  border-radius: 0 0 $value 0;
+}
+
+@mixin border-radius-bottom-left($value) {
+  border-radius: 0 0 0 $value;
+}
+
+@mixin border-radius-top($value) {
+  border-radius: $value $value 0 0;
+}
+
+@mixin border-radius-right($value) {
+  border-radius: 0 $value $value 0;
+}
+
+@mixin border-radius-bottom($value) {
+  border-radius: 0 0 $value $value;
+}
+
+@mixin border-radius-left($value) {
+  border-radius: $value 0 0 $value;
+}
+
+@mixin border-radius-diagonal-main($value) {
+  border-radius: $value 0 $value 0;
+}
+
+@mixin border-radius-diagonal-secondary($value) {
+  border-radius: 0 $value 0 $value;
+}
+
+@mixin shadow-text-stroke($width, $color) {
+  text-shadow:
+    calc(-1 * $width) calc(-1 * $width) 0 $color,
+    $width calc(-1 * $width) 0 $color,
+    calc(-1 * $width) $width 0 $color,
+    $width $width 0 $color;
+}

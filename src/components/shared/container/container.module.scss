@@ -1,0 +1,13 @@
+// ^======================== container ========================^ //
+
+._ {
+  max-width: desk(1440px);
+  height: 100%;
+
+  margin-inline: auto;
+  padding-inline: desk(40px, 32px);
+
+  @include TABLET {
+    padding-inline: tab(40px, 16px);
+  }
+}

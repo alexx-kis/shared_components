@@ -1,0 +1,25 @@
+// ^======================== breadcrumb ========================^ //
+
+.breadcrumb {
+  color: $white;
+  font-size: desk(16px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+
+  @include TABLET {
+    font-size: tab(16px, 12px);
+  }
+
+  &._active {
+    display: grid;
+    place-items: center;
+    height: desk(27px);
+    padding-inline: desk(10px);
+    border-radius: desk(6px);
+    background-color: $white25;
+
+    @include TABLET {
+      height: tab(27px, 23px);
+    }
+  }
+}

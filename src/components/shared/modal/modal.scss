@@ -1,0 +1,29 @@
+// ^======================== modal ========================^ //
+
+.modal {
+  display: block;
+  margin: auto;
+  position: fixed;
+  inset-block-start: 0;
+  inset-block-end: 0;
+  z-index: $modalZIndex;
+  visibility: hidden;
+  opacity: 0;
+  overflow: visible;
+  background-color: transparent;
+  transition: all 250ms;
+  user-select: text;
+
+  &._open {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__close-button {
+    background-color: transparent;
+
+    img {
+      @include square(100%);
+    }
+  }
+}

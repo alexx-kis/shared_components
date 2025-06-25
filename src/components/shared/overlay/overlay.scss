@@ -1,0 +1,17 @@
+// ^======================== overlay ========================^ //
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  visibility: hidden;
+  opacity: 0;
+  background-color: #00000080;
+  cursor: pointer;
+  // z-index: $overlayZIndex;
+  transition: all 250ms;
+
+  &._visible {
+    visibility: visible;
+    opacity: 1;
+  }
+}
