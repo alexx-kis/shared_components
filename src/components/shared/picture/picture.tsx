@@ -1,5 +1,5 @@
 import type { RefObject } from 'react';
-import { Ext, MediaPrefix, ViewportWidth } from '../../../constants/general-constants';
+import { Ext, MediaPrefix, ViewportWidth } from '../../../constants/const';
 import './picture.scss';
 
 // ^======================== Picture ========================^ //

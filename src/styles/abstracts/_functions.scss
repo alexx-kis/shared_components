@@ -33,11 +33,6 @@
   @return vwm($max, $min, $FULLHD_WIDTH);
 }
 
-// // % adapt to desktop viewport width (CONST) (1440px)
-// @function const($const) {
-//   @return vwm($const, $const, $DESK_WIDTH);
-// }
-
 // % adapt to desktop viewport width (1440px)
 @function desk($max, $min: null) {
   @if $min ==null {

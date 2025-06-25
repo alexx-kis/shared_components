@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { NameSpace } from '../../constants/general-constants';
+import { NameSpace } from '../../constants/const';
 import type { OpenElementsProcess } from '../store-types';
 
 // %======================== openElementProcess ========================% //

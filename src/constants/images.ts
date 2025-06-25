@@ -1,5 +1,5 @@
 import { generatePaths } from '../utils/utils';
-import { Ext, PREFIX } from './general-constants';
+import { Ext, PREFIX } from './const';
 
 // %======================== images ========================% //
 

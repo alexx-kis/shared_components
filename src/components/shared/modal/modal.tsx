@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
-import type { OpenElement } from '../../../constants/general-constants';
+import type { OpenElement } from '../../../constants/const';
 import { dropOpenElement, getOpenElements } from '../../../store/processes/open-element.process';
 import { useAppDispatch, useAppSelector } from '../../../store/store-hooks';
 import Overlay from '../overlay/overlay';
