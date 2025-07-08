@@ -3,13 +3,13 @@ import { useEffect, useRef } from 'react';
 // ^======================== SVG ========================^ //
 
 type SVGProps = {
-  bemClass?: string;
+  className?: string;
   src: string;
   alt?: string | undefined;
   size: number[];
 };
 
-function SVG({ src, alt, bemClass, size }: SVGProps): React.JSX.Element {
+function SVG({ src, alt, className, size }: SVGProps): React.JSX.Element {
   const imgRef = useRef<HTMLImageElement | null>(null);
   const altProp = alt ? alt : '';
   const width = size[0];
@@ -37,8 +37,8 @@ function SVG({ src, alt, bemClass, size }: SVGProps): React.JSX.Element {
           svg.setAttribute('viewBox', `0 0 ${svg.getAttribute('width')} ${svg.getAttribute('height')}`);
         }
 
-        if (bemClass) {
-          svg.setAttribute('class', bemClass);
+        if (className) {
+          svg.setAttribute('class', className);
         }
 
         imgRef.current?.replaceWith(svg);
@@ -49,9 +49,9 @@ function SVG({ src, alt, bemClass, size }: SVGProps): React.JSX.Element {
     };
 
     replaceWithSvg();
-  }, [src, bemClass]);
+  }, [src, className]);
 
-  return <img className={bemClass} ref={imgRef} src={src} alt={altProp} width={width} height={height} />;
+  return <img className={className} ref={imgRef} src={src} alt={altProp} width={width} height={height} />;
 }
 
 export default SVG;
