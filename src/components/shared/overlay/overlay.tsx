@@ -1,20 +1,20 @@
 'use client';
 
-import { dropOpenElement, getOpenElements } from '@/store/processes/open-element.process';
-import { useAppDispatch, useAppSelector } from '@/store/store-hooks';
-import { isEscapeKey } from '@/utils/utils';
 import { useEffect } from 'react';
+import { dropOpenElement, getOpenElements } from '../../../store/processes/open-element.process';
+import { useAppDispatch, useAppSelector } from '../../../store/store-hooks';
+import { isEscapeKey } from '../../../utils/utils';
 import './overlay.scss';
 
 // ^======================== Overlay ========================^ //
 
 type OverlayProps = {
-  bemClass: string;
+  className: string;
 };
 
 function Overlay(overlayProps: OverlayProps): React.JSX.Element {
 
-  const { bemClass } = overlayProps;
+  const { className } = overlayProps;
 
   const dispatch = useAppDispatch();
   const openElements = useAppSelector(getOpenElements);
@@ -43,7 +43,7 @@ function Overlay(overlayProps: OverlayProps): React.JSX.Element {
   };
 
   return (
-    <div className={`${bemClass} overlay`} onClick={handleOverlayClick} />
+    <div className={`${className} overlay`} onClick={handleOverlayClick} />
   );
 }
 export default Overlay;

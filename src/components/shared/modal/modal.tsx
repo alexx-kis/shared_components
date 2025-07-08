@@ -44,7 +44,7 @@ function Modal(modalProps: ModalProps): React.JSX.Element {
       style={{ zIndex: zIndex }}
     >
       <Overlay
-        bemClass={clsx(
+        className={clsx(
           'modal__overlay',
           { '_visible': isModalOpen }
         )}
