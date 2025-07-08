@@ -1,21 +1,23 @@
-import { ReactNode, Ref } from 'react';
+import { CSSProperties, ReactNode, Ref } from 'react';
 import './background.scss';
 
 // ^======================== Background ========================^ //
 
 type BackgroundProps = {
-  bemClass: string;
+  className: string;
+  style: CSSProperties;
   children?: ReactNode;
   ref?: Ref<HTMLDivElement>;
 };
 
 function Background(backgroundProps: BackgroundProps): React.JSX.Element {
 
-  const { bemClass, children, ref } = backgroundProps;
+  const { className, style, children, ref } = backgroundProps;
 
   return (
     <div
-      className={`${bemClass} background`}
+      className={`${className} background`}
+      style={style}
       ref={ref}
     >
       {children}
