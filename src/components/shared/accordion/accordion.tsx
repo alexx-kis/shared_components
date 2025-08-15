@@ -12,7 +12,7 @@ export type AccordionDataType<H, B> = {
 };
 
 type AccordionProps<H, B> = {
-  bemClass: string;
+  className: string;
   data: AccordionDataType<H, B>[];
   HeaderComponent: React.JSXElementConstructor<H>;
   BodyComponent: React.JSXElementConstructor<B>;
@@ -20,7 +20,7 @@ type AccordionProps<H, B> = {
 };
 
 function Accordion<H extends object, B extends object>(accordionProps: AccordionProps<H, B>): React.JSX.Element {
-  const { bemClass, data, HeaderComponent, BodyComponent, isFirstTabOpen } = accordionProps;
+  const { className, data, HeaderComponent, BodyComponent, isFirstTabOpen } = accordionProps;
 
   const [activeTabIndex, setActiveTabIndex] = useState<number | null>(isFirstTabOpen ? 0 : null);
   const [scrollHeight, setScrollHeight] = useState<number | undefined>(0);
@@ -38,7 +38,7 @@ function Accordion<H extends object, B extends object>(accordionProps: Accordion
   };
 
   return (
-    <ul className={`${bemClass} accordion`}>
+    <ul className={`${className} accordion`}>
       {data.map(({ header, body }, index) => (
         <li key={index} className={clsx('accordion__tab', { '_active': activeTabIndex === index })}>
           <div className='accordion__header' onClick={() => handleTabClick(index)}>
