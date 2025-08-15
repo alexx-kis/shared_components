@@ -8,12 +8,12 @@ import './breadcrumbs.scss';
 // $======================== Breadcrumbs ========================$ //
 
 type BreadcrumbsProps = {
-  bemClass: string;
+  className: string;
 };
 
 function Breadcrumbs(breadcrumbsProps: BreadcrumbsProps): React.JSX.Element {
 
-  const { bemClass } = breadcrumbsProps;
+  const { className } = breadcrumbsProps;
   const pathname = usePathname();
   const rawPathnames = pathname.split('/').slice(1); // remove first empty segment
 
@@ -30,7 +30,7 @@ function Breadcrumbs(breadcrumbsProps: BreadcrumbsProps): React.JSX.Element {
       : cleanedPathnames;
 
   return (
-    <ul className={`${bemClass} breadcrumbs`}>
+    <ul className={`${className} breadcrumbs`}>
       <li className='breadcrumbs__item'>
         <Breadcrumb
           title={PagesNames[AppRoute.HOME]}

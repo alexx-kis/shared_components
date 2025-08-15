@@ -8,11 +8,11 @@ import './burger.scss';
 // ^======================== Burger ========================^ //
 
 type BurgerProps = {
-  bemClass: string;
+  className: string;
 };
 
 function Burger(burgerProps: BurgerProps): React.JSX.Element {
-  const { bemClass } = burgerProps;
+  const { className } = burgerProps;
   const dispatch = useAppDispatch();
 
   const handleBurgerClick = () => {
@@ -22,7 +22,7 @@ function Burger(burgerProps: BurgerProps): React.JSX.Element {
   return (
     <button
       type='button'
-      className={`${bemClass} burger`}
+      className={`${className} burger`}
       onClick={handleBurgerClick}
     >
       <Image
