@@ -1,10 +1,11 @@
 'use client';
 
+import clsx from 'clsx';
 import { useEffect } from 'react';
 import { dropOpenElement, getOpenElements } from '../../../store/processes/open-element.process';
 import { useAppDispatch, useAppSelector } from '../../../store/store-hooks';
 import { isEscapeKey } from '../../../utils/utils';
-import './overlay.scss';
+import s from './overlay.module.scss';
 
 // ^======================== Overlay ========================^ //
 
@@ -43,7 +44,7 @@ function Overlay(overlayProps: OverlayProps): React.JSX.Element {
   };
 
   return (
-    <div className={`${className} overlay`} onClick={handleOverlayClick} />
+    <div className={clsx(s.overlay, className)} onClick={handleOverlayClick} />
   );
 }
 export default Overlay;

@@ -6,7 +6,7 @@ import type { OpenElement } from '../../../constants/const';
 import { getOpenElements } from '../../../store/processes/open-element.process';
 import { useAppSelector } from '../../../store/store-hooks';
 import Overlay from '../overlay/overlay';
-import './modal.scss';
+import s from './modal.module.scss';
 
 // $======================== Modal ========================$ //
 
@@ -37,15 +37,11 @@ function Modal(modalProps: ModalProps): React.JSX.Element {
 
   return (
     <dialog
-      className={clsx(
-        `modal ${className}`,
-        { '_open': isModalOpen },
-      )}
+      className={clsx(s.modal, className, { [s._open]: isModalOpen })}
       style={{ zIndex: zIndex }}
     >
       <Overlay
-        className={clsx(
-          'modal__overlay',
+        className={clsx(s.overlay,
           { '_visible': isModalOpen }
         )}
       />

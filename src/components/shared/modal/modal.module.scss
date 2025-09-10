@@ -19,11 +19,12 @@
     opacity: 1;
   }
 
-  &__close-button {
-    background-color: transparent;
+}
 
-    img {
-      @include square(100%);
-    }
+.close-button {
+  background-color: transparent;
+
+  img {
+    @include square(100%);
   }
 }
