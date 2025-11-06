@@ -1,0 +1,24 @@
+// $======================== accordion ========================$ //
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: desk(12px);
+}
+
+.tab {}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header-button {}
+
+.body {
+  max-height: 0;
+  overflow: clip;
+  transition: max-height 250ms ease-in-out;
+}

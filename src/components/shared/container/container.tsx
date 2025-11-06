@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
-import container from './container.module.scss';
+import s from './container.module.scss';
 
 // ^======================== Container ========================^ //
 
@@ -13,6 +13,6 @@ function Container(containerProps: ContainerProps): React.JSX.Element {
 
   const { className, children } = containerProps;
 
-  return (<div className={clsx(className, container._)}>{children}</div>);
+  return (<div className={clsx(className, s.container)}>{children}</div>);
 }
 export default Container;

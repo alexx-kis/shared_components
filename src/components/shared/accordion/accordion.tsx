@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
-import './accordion.scss';
+import s from './accordion.module.scss'
 
 // $======================== Accordion ========================$ //
 
@@ -38,14 +38,14 @@ function Accordion<H extends object, B extends object>(accordionProps: Accordion
   };
 
   return (
-    <ul className={`${className} accordion`}>
+    <ul className={clsx(className, s.accordion)}>
       {data.map(({ header, body }, index) => (
-        <li key={index} className={clsx('accordion__tab', { '_active': activeTabIndex === index })}>
-          <div className='accordion__header' onClick={() => handleTabClick(index)}>
+        <li key={index} className={clsx(s.tab, { [s._active]: activeTabIndex === index })}>
+          <div className={s.header} onClick={() => handleTabClick(index)}>
             <HeaderComponent {...header} isActive={activeTabIndex === index} />
           </div>
           <div
-            className='accordion__body'
+            className={s.body}
             ref={(el) => { if (el) bodyRefs.current[index] = el; }}
             style={{ maxHeight: activeTabIndex === index ? `${scrollHeight! + 1}px` : '0' }}
           >

@@ -1,5 +1,6 @@
 import { CSSProperties, ReactNode, Ref } from 'react';
-import './background.scss';
+import s from './background.module.scss'
+import clsx from 'clsx';
 
 // ^======================== Background ========================^ //
 
@@ -16,7 +17,7 @@ function Background(backgroundProps: BackgroundProps): React.JSX.Element {
 
   return (
     <div
-      className={`${className} background`}
+      className={clsx(className, s.background)}
       style={style}
       ref={ref}
     >
