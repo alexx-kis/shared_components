@@ -1,105 +1,137 @@
+'use client';
+
 import clsx from 'clsx';
 import { type ChangeEvent, useEffect, useRef, useState } from 'react';
-import './select.scss';
 import SVG from '../svg/svg';
+import s from './select.module.scss';
 
 // ^======================== Select ========================^ //
 
 type SelectProps = {
-  bemClass: string;
+  classNames: {
+    main?: string;
+    header?: string;
+    value?: string;
+    icon?: string;
+    body?: string;
+    options?: string;
+    option?: string;
+  };
   iconSrc: string;
   iconSize: number;
   options: string[];
   name: string;
   value: string;
   placeholder: string;
-  onSelectChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onSelectChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 function Select(selectProps: SelectProps): React.JSX.Element {
 
-  const { bemClass, iconSrc, iconSize, options, name, onSelectChange, value, placeholder } = selectProps;
+  const { classNames, iconSrc, iconSize, options, name, onSelectChange, value, placeholder } = selectProps;
 
   const [isOpen, setIsOpen] = useState(false);
   const [headerText, setHeaderText] = useState(placeholder);
 
+  const selectRef = useRef<HTMLDivElement | null>(null);
   const selectBodyRef = useRef<HTMLDivElement | null>(null);
 
   const openSelect = () => {
-    selectBodyRef.current!.style.maxHeight = `${selectBodyRef.current!.scrollHeight + 1}px`;
     setIsOpen(true);
+
+    const body = selectBodyRef.current;
+    if (!body) return;
+
+    body.style.maxHeight = `${body.scrollHeight + 1}px`;
   };
 
   const closeSelect = () => {
-    selectBodyRef.current!.style.maxHeight = '0px';
     setIsOpen(false);
+
+    const body = selectBodyRef.current;
+    if (!body) return;
+
+    body.style.maxHeight = '0px';
   };
 
   const handleSelectHeaderClick = () => {
-    if (isOpen) {
-      closeSelect();
-    } else {
-      openSelect();
-    }
+    if (isOpen) return closeSelect();
+    openSelect();
   };
 
   useEffect(() => {
-    const handleDocumentClick = () => {
-      if (isOpen) {
-        closeSelect();
-      }
+    const handleDocumentPointerDown = (e: PointerEvent) => {
+      if (!isOpen) return;
+
+      const root = selectRef.current;
+      if (!root) return;
+
+      const target = e.target;
+      if (!(target instanceof Node)) return;
+
+      if (root.contains(target)) return;
+
+      closeSelect();
     };
 
-    document.addEventListener('click', handleDocumentClick);
-    return () => document.removeEventListener('click', handleDocumentClick);
+    document.addEventListener('pointerdown', handleDocumentPointerDown);
+    return () => document.removeEventListener('pointerdown', handleDocumentPointerDown);
   }, [isOpen]);
+
+  const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setHeaderText(e.target.value);
+    onSelectChange(e);
+    closeSelect();
+  };
 
   useEffect(() => {
     if (value) {
       setHeaderText(value);
-    } else {
-      setHeaderText(placeholder);
+      return;
     }
 
+    setHeaderText(placeholder);
   }, [value, placeholder]);
 
   return (
     <div
-      className={clsx(
-        `select ${bemClass}`,
-        { '_active': isOpen },
-        { '_selected': headerText !== placeholder }
+      className={clsx(classNames.main, s.select,
+        { [s._active]: isOpen },
+        { [s._selected]: headerText !== placeholder }
       )}
+      ref={selectRef}
     >
-      <div className='select__header' onClick={handleSelectHeaderClick}>
-        <p className='select__header-text'>{headerText}</p>
+      <button
+        type='button'
+        className={clsx(s.header, classNames.header)}
+        onClick={handleSelectHeaderClick}
+        aria-expanded={isOpen}>
+        <span className={clsx(s.value, classNames.value)}>{headerText}</span>
         <SVG
-          bemClass='select__header-icon'
+          className={clsx(s.icon, classNames.icon)}
           src={iconSrc}
           size={[iconSize]}
         />
-      </div>
-      <div className='select__body' ref={selectBodyRef}>
-        <ul className='select__list'>
-          {options.map((option) =>
-            <li key={option} className='select__item'>
-              <label
-                className='select__label'
-                onClick={closeSelect}
-              >
-                <input
-                  className='select__input'
-                  type='radio'
-                  name={name}
-                  value={option}
-                  checked={option === value}
-                  onChange={onSelectChange}
-                />
-                {option}
-              </label>
-            </li>
+      </button>
+      <div className={clsx(s.body, classNames.body)} ref={selectBodyRef}>
+        <div className={clsx(s.options, classNames.options)}>
+          {options.map((option, index) =>
+            <label
+              key={`${option}-${index}`}
+              className={clsx(s.option, classNames.option)}
+            >
+              <input
+                className={s.input}
+                type='radio'
+                name={name}
+                value={option}
+                checked={option === value}
+                onChange={handleOptionChange}
+              />
+              {option}
+            </label>
           )}
-        </ul>
+        </div>
       </div>
     </div>
   );
