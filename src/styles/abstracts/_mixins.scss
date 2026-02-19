@@ -63,6 +63,12 @@
   }
 }
 
+@mixin CONTAINER() {
+  @media (max-width: $CONT_WIDTH) {
+    @content;
+  }
+}
+
 @mixin LAPTOP() {
   @media (max-width: $LAP_WIDTH) {
     @content;
