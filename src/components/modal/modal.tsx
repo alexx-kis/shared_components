@@ -2,9 +2,9 @@
 
 import clsx from 'clsx';
 import { type ReactElement, type ReactNode, useEffect, useState } from 'react';
-import type { OpenElement } from '../../../constants/const';
-import { getOpenElements } from '../../../store/processes/open-element.process';
-import { useAppSelector } from '../../../store/store-hooks';
+import type { OpenElement } from '../../constants/const';
+import { getOpenElements } from '../../store/processes/open-element.process';
+import { useAppSelector } from '../../store/store-hooks';
 import Overlay from '../overlay/overlay';
 import s from './modal.module.scss';
 

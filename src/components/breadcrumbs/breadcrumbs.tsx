@@ -3,7 +3,8 @@
 import { AppRoute, PagesNames } from '@/constants/const';
 import { usePathname } from 'next/navigation';
 import Breadcrumb from '../breadcrumb/breadcrumb';
-import './breadcrumbs.scss';
+import s from './breadcrumbs.module.scss';
+import clsx from 'clsx';
 
 // $======================== Breadcrumbs ========================$ //
 
@@ -30,8 +31,8 @@ function Breadcrumbs(breadcrumbsProps: BreadcrumbsProps): React.JSX.Element {
       : cleanedPathnames;
 
   return (
-    <ul className={`${className} breadcrumbs`}>
-      <li className='breadcrumbs__item'>
+    <ul className={clsx(className, s.breadcrumbs)}>
+      <li className={s.item}>
         <Breadcrumb
           title={PagesNames[AppRoute.HOME]}
           href={AppRoute.HOME}

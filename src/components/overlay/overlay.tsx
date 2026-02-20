@@ -2,9 +2,9 @@
 
 import clsx from 'clsx';
 import { useEffect } from 'react';
-import { dropOpenElement, getOpenElements } from '../../../store/processes/open-element.process';
-import { useAppDispatch, useAppSelector } from '../../../store/store-hooks';
-import { isEscapeKey } from '../../../utils/utils';
+import { dropOpenElement, getOpenElements } from '../../store/processes/open-element.process';
+import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
+import { isEscapeKey } from '../../utils/utils';
 import s from './overlay.module.scss';
 
 // ^======================== Overlay ========================^ //

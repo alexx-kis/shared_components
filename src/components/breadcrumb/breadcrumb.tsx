@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import './breadcrumb.scss';
+import s from './breadcrumb.module.scss';
 
 // ^======================== Breadcrumb ========================^ //
 
@@ -22,8 +22,8 @@ function Breadcrumb(breadcrumbProps: BreadcrumbProps): React.JSX.Element {
   return (
     <Link
       className={clsx(
-        'breadcrumb',
-        { '_active': `/${pathnames[pathnames.length - 1]}/` === href }
+        s.breadcrumb,
+        { [s._active]: `/${pathnames[pathnames.length - 1]}/` === href }
       )}
       href={href}
     >

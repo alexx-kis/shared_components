@@ -1,5 +1,5 @@
-import Wrapper from './components/layout/wrapper/wrapper';
 import Providers from './components/utility/providers/providers';
+import Wrapper from './components/wrapper/wrapper';
 
 function App() {
 

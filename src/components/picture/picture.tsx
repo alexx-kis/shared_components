@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { RefObject } from 'react';
-import { Ext, MediaPrefix, ViewportWidth } from '../../../constants/const';
+import { Ext, MediaPrefix, ViewportWidth } from '../../constants/const';
 import s from './picture.module.scss';
 
 type PictureProps = {

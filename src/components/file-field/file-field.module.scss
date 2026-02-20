@@ -1,0 +1,68 @@
+// ^======================== file-field ========================^ //
+
+.file-field {
+  height: desk(146px);
+
+  @include TABLET {
+    height: tab(146px, 118px);
+  }
+
+  &._file-added {
+    height: desk(56px);
+    background-color: $darkGray10;
+
+    .label {
+      flex-direction: row;
+      cursor: auto;
+    }
+
+    .remove-button {
+      display: block;
+    }
+  }
+
+  input {
+    width: 0;
+    height: 0;
+    position: absolute;
+    visibility: hidden;
+  }
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: desk(4px);
+  height: 100%;
+  cursor: pointer;
+}
+
+.icon {
+  @include square(desk(24px));
+}
+
+.placeholder {
+  opacity: 0.5;
+  font-size: desk(14px);
+  font-weight: 500;
+  line-height: 1.3;
+
+  @include TABLET {
+    font-size: tab(14px, 12px);
+  }
+}
+
+.file-name {
+  font-size: desk(14px);
+
+  @include TABLET {
+    font-size: tab(14px, 12px);
+  }
+}
+
+.remove-button {
+  display: none;
+  @include square(desk(12px));
+}

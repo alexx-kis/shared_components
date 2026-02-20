@@ -1,4 +1,4 @@
-import './dashed-border.scss';
+import s from './dashed-border.module.scss';
 
 // ^======================== DashedBorder ========================^ //
 
@@ -63,7 +63,7 @@ function DashedBorder(dashedBorderProps: DashedBorderProps): React.JSX.Element {
 
   return (
     <div
-      className='dashed-border'
+      className={s['dashed-border']}
       ref={dashedBorderRef}
     >
     </div>

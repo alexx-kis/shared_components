@@ -5,12 +5,12 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { ChangeEvent, DragEvent, MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
 import DashedBorder from '../dashed-border/dashed-border';
-import './file-field.scss';
+import s from './file-field.module.scss';
 
 // ^======================== FileField ========================^ //
 
 type FileFieldProps = {
-  bemClass: string;
+  className: string;
   name: string;
   placeholder: string;
   value: File | null;
@@ -20,7 +20,7 @@ type FileFieldProps = {
 const initialFileFieldState = { fileName: '', iconSrc: ICONS.addFile };
 
 function FileField(fileFieldProps: FileFieldProps): React.JSX.Element {
-  const { bemClass, name, placeholder, value, onFileFieldChange } = fileFieldProps;
+  const { className, name, placeholder, value, onFileFieldChange } = fileFieldProps;
   const fileInputRef = useRef<HTMLInputElement>(null);
   const fieldRef = useRef<HTMLDivElement>(null);
 
@@ -105,10 +105,7 @@ function FileField(fileFieldProps: FileFieldProps): React.JSX.Element {
   return (
     <div
       ref={fieldRef}
-      className={clsx(
-        `${bemClass} file-field`,
-        { '_file-added': fileFieldState.fileName }
-      )}
+      className={clsx(className, s['file-field'], {[s['_file-added']]: fileFieldState.fileName})}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
@@ -122,10 +119,10 @@ function FileField(fileFieldProps: FileFieldProps): React.JSX.Element {
       }
       <label
         htmlFor='file-field-input'
-        className='file-field__label'
+        className={s.label}
       >
         <Image
-          className='file-field__icon'
+          className={s.icon}
           src={fileFieldState.iconSrc}
           width={24}
           height={24}
@@ -133,12 +130,12 @@ function FileField(fileFieldProps: FileFieldProps): React.JSX.Element {
         />
         {
           fileFieldState.fileName
-            ? <p className='file-field__file-name'>{fileFieldState.fileName}</p>
-            : <p className='file-field__placeholder'>{placeholder}</p>
+            ? <p className={s['file-name']}>{fileFieldState.fileName}</p>
+            : <p className={s.placeholder}>{placeholder}</p>
         }
         <button
           type='button'
-          className='file-field__remove-button'
+          className={s['remove-button']}
           onClick={handleRemoveButtonClick}
         >
           <Image
@@ -151,7 +148,7 @@ function FileField(fileFieldProps: FileFieldProps): React.JSX.Element {
       </label>
       <input
         type='file'
-        className='field__input _file'
+        className={s.input}
         onChange={handleFileFieldChange}
         name={name}
         ref={fileInputRef}

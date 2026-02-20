@@ -1,8 +1,9 @@
 
-import type { OpenElement } from '../../../constants/const';
-import { dropOpenElement } from '../../../store/processes/open-element.process';
-import { useAppDispatch } from '../../../store/store-hooks';
-import './close-modal-button.scss';
+import clsx from 'clsx';
+import type { OpenElement } from '../../constants/const';
+import { dropOpenElement } from '../../store/processes/open-element.process';
+import { useAppDispatch } from '../../store/store-hooks';
+import s from './close-modal-button.module.scss';
 
 // ^======================== CloseModalButton ========================^ //
 
@@ -22,13 +23,13 @@ function CloseModalButton(closeModalButtonProps: CloseModalButtonProps): React.J
 
   const handleCloseModalButtonClick = () => {
     dispatch(dropOpenElement(modalName));
-    onCloseModalButtonClick?.();    
+    onCloseModalButtonClick?.();
   };
 
   return (
     <button
       type='button'
-      className={`${className} close-modal-button`}
+      className={clsx(className, s['close-modal-button'])}
       onClick={handleCloseModalButtonClick}
     >
       {/* Image or img */}
