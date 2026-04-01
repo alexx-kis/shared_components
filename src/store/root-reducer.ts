@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { NameSpace } from '../constants/const';
-import { openElementProcess } from './processes/open-element.process';
+import { openElementProcess } from './slices/open-element.process';
 
 // %======================== rootReducer ========================% //
 

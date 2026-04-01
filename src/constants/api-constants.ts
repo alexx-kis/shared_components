@@ -6,6 +6,6 @@ export const REQUEST_TIMEOUT = 5000;
 export const COOKIE_LABEL_TIMEOUT = 3000;
 export const COOKIE_NAME = 'cookiesAccepted';
 
-export enum APIRoute {
+export enum API_Route {
   route = '/posts',
 }

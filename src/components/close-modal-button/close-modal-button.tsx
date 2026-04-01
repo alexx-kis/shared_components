@@ -1,7 +1,7 @@
 
 import clsx from 'clsx';
 import type { OpenElement } from '../../constants/const';
-import { dropOpenElement } from '../../store/processes/open-element.process';
+import { dropOpenElement } from '../../store/slices/open-element.process';
 import { useAppDispatch } from '../../store/store-hooks';
 import s from './close-modal-button.module.scss';
 

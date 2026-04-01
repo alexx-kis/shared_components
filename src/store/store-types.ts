@@ -10,7 +10,7 @@ export type Process = {
   field: string;
 };
 
-export type AsyncThunkType = {
+export type AppAsyncThunk = {
   dispatch: AppDispatch;
   state: AppState;
   extra: AxiosInstance;
