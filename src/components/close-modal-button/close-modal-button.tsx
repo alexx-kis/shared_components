@@ -11,7 +11,7 @@ type CloseModalButtonProps = {
   className: string;
   iconSrc: string;
   iconSize: [number, number];
-  modalName: OpenElement;
+  modalName?: OpenElement;
   onCloseModalButtonClick?: () => void;
 };
 

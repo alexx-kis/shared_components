@@ -51,3 +51,5 @@ export enum OpenElement {
   OPEN_ELEMENT = 'OPEN_ELEMENT',
   ASIDE = 'ASIDE',
 }
+
+export const OPEN_MODAL_INITIAL_Z_INDEX = 100;

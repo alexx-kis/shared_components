@@ -1,30 +1,65 @@
-// ^======================== modal ========================^ //
+@use '../../../styles/abstracts' as *;
+
+// $======================== modal ========================$ //
 
 .modal {
   display: block;
-  margin: auto;
+  width: 100%;
+  height: 100%;
   position: fixed;
-  inset-block-start: 0;
-  inset-block-end: 0;
-  z-index: $modalZIndex;
+  inset: 0;
+  z-index: 100;
   visibility: hidden;
   opacity: 0;
-  overflow: visible;
-  background-color: transparent;
+  overflow: auto;
+  background-color: #00000066;
+  cursor: pointer;
   transition: all 250ms;
   user-select: text;
 
   &._open {
     visibility: visible;
     opacity: 1;
+
+    .inner {
+      scale: 1;
+
+      @include MIDDLE {
+        translate: 0;
+      }
+    }
   }
 
 }
 
-.close-button {
-  background-color: transparent;
+.inner {
+  width: fit-content;
+  max-width: calc(100% - 48px);
+  height: fit-content;
+  max-height: calc(100% - 48px);
+  margin: auto;
+  padding: 20px;
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  border-radius: 16px;
+  background-color: #fff;
+  cursor: auto;
+  scale: 0;
+  transition: all 250ms;
 
-  img {
-    @include square(100%);
+  @include MIDDLE {
+    max-width: 100%;
+    width: 100% !important;
+    margin-bottom: 0;
+    border-radius: 16px 16px 0 0;
+    scale: 1;
+    translate: 0 100%;
   }
+}
+
+.close-button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
