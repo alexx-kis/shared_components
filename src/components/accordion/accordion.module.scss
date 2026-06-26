@@ -1,9 +1,10 @@
+@use '../../../styles/abstracts' as *;
+
 // $======================== accordion ========================$ //
 
 .accordion {
   display: flex;
   flex-direction: column;
-  gap: desk(12px);
 }
 
 .tab {}
@@ -14,8 +15,6 @@
   align-items: center;
   cursor: pointer;
 }
-
-.header-button {}
 
 .body {
   max-height: 0;
