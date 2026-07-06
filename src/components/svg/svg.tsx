@@ -1,57 +1,97 @@
-import { useEffect, useRef } from 'react';
+'use client';
 
-// ^======================== SVG ========================^ //
+import { CSSProperties, useEffect, useState } from 'react';
 
-type SVGProps = {
+// ^======================== Svg ========================^ //
+
+type SvgProps = {
   className?: string;
   src: string;
-  alt?: string | undefined;
-  size: number[];
+  alt?: string;
+  size: readonly [number, number?];
 };
 
-function SVG({ src, alt, className, size }: SVGProps): React.JSX.Element {
-  const imgRef = useRef<HTMLImageElement | null>(null);
-  const altProp = alt ? alt : '';
+const svgCache = new Map<string, Promise<string>>();
+
+const getSvgText = (src: string): Promise<string> => {
+  const cachedSvg = svgCache.get(src);
+
+  if (cachedSvg) return cachedSvg;
+
+  const svgPromise = fetch(src).then((response) => response.text());
+
+  svgCache.set(src, svgPromise);
+
+  return svgPromise;
+};
+
+export default function Svg(props: SvgProps): React.JSX.Element {
+  const { className, src, alt = '', size } = props;
+
+  const [svgMarkup, setSvgMarkup] = useState<string>('');
+
   const width = size[0];
   const height = size[1] ?? size[0];
 
+  const wrapperStyle: CSSProperties = {
+    display: 'inline-flex',
+    width,
+    height,
+    flexShrink: 0,
+    lineHeight: 0,
+  };
+
   useEffect(() => {
-    if (!imgRef.current) return;
+    let isMounted = true;
 
-    const replaceWithSvg = async () => {
+    const loadSvg = async (): Promise<void> => {
       try {
-        const response = await fetch(src);
-        const data = await response.text();
+        const data = await getSvgText(src);
         const parser = new DOMParser();
-        const svg = parser.parseFromString(data, 'image/svg+xml').querySelector('svg');
+        const document = parser.parseFromString(data, 'image/svg+xml');
+        const svg = document.querySelector('svg');
 
-        if (!svg) {
-          // eslint-disable-next-line no-console
-          console.error(`No SVG found in ${src}`);
-          return;
-        }
+        if (!svg) return;
 
         svg.removeAttribute('xmlns:a');
 
-        if (!svg.hasAttribute('viewBox') && svg.hasAttribute('height') && svg.hasAttribute('width')) {
+        if (!svg.hasAttribute('viewBox') && svg.hasAttribute('width') && svg.hasAttribute('height')) {
           svg.setAttribute('viewBox', `0 0 ${svg.getAttribute('width')} ${svg.getAttribute('height')}`);
         }
+
+        svg.setAttribute('width', String(width));
+        svg.setAttribute('height', String(height));
+
+        svg.style.display = 'block';
+        svg.style.width = '100%';
+        svg.style.height = '100%';
 
         if (className) {
           svg.setAttribute('class', className);
         }
 
-        imgRef.current?.replaceWith(svg);
+        if (alt) {
+          svg.setAttribute('role', 'img');
+          svg.setAttribute('aria-label', alt);
+        } else {
+          svg.setAttribute('aria-hidden', 'true');
+        }
+
+        if (!isMounted) return;
+
+        setSvgMarkup(svg.outerHTML);
       } catch (error) {
         // eslint-disable-next-line no-console
-        console.error('Error fetching the SVG:', error);
+        console.error('Error loading SVG:', error);
       }
     };
 
-    replaceWithSvg();
-  }, [src, className]);
+    loadSvg();
 
-  return <img className={className} ref={imgRef} src={src} alt={altProp} width={width} height={height} />;
+    return () => {
+      isMounted = false;
+    };
+  }, [src, className, alt, width, height]);
+
+  return <span style={wrapperStyle} dangerouslySetInnerHTML={{ __html: svgMarkup }} />;
 }
-
-export default SVG;
