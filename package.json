@@ -14,6 +14,7 @@
     "build": "tsc -b && vite build",
     "build:cli": "tsup cli/index.ts --format esm --out-dir dist/cli --clean",
     "lint": "eslint .",
+    "prepare": "npm run build:cli",
     "preview": "vite preview"
   },
   "dependencies": {
