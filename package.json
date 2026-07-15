@@ -1,11 +1,18 @@
 {
   "name": "shared_components",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
+  "bin": {
+    "shared-components": "./dist/cli/index.js"
+  },
+  "files": [
+    "dist",
+    "src/components"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:cli": "tsup cli/index.ts --format esm --out-dir dist/cli --clean",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -19,7 +26,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
-    "@types/node": "^25.3.0",
+    "@types/node": "^25.9.5",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.2.3",
@@ -28,6 +35,7 @@
     "eslint-plugin-react-refresh": "^0.5.0",
     "globals": "^17.3.0",
     "sass": "^1.97.3",
+    "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "vite": "^7.3.1"
   }
