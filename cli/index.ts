@@ -4,23 +4,41 @@ import { cpSync, existsSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const [, , command, componentName] = process.argv;
+type InstallableItem = {
+  source: string[];
+  target: string[];
+};
 
-const installComponent = (name: string): void => {
+const [, , command, itemName] = process.argv;
+
+const items: Record<string, InstallableItem> = {
+  abstracts: {
+    source: ['src', 'styles', 'abstracts'],
+    target: ['src', 'styles', 'abstracts'],
+  },
+};
+
+const installItem = (name: string): void => {
   const cliDirectory = path.dirname(fileURLToPath(import.meta.url));
   const packageRoot = path.resolve(cliDirectory, '../..');
 
-  const sourcePath = path.join(packageRoot, 'src', 'components', name);
-  const targetPath = path.join(process.cwd(), 'src', 'components', name);
+  const item = items[name];
+
+  const sourceParts = item?.source ?? ['src', 'components', name];
+  const targetParts = item?.target ?? ['src', 'components', name];
+
+  const sourcePath = path.join(packageRoot, ...sourceParts);
+  const targetPath = path.join(process.cwd(), ...targetParts);
+  const targetDisplayPath = targetParts.join('/');
 
   if (!existsSync(sourcePath)) {
-    console.error(`Component "${name}" not found.`);
+    console.error(`"${name}" not found.`);
     process.exitCode = 1;
     return;
   }
 
   if (existsSync(targetPath)) {
-    console.error(`Component "${name}" already exists.`);
+    console.error(`"${targetDisplayPath}" already exists.`);
     process.exitCode = 1;
     return;
   }
@@ -28,11 +46,11 @@ const installComponent = (name: string): void => {
   mkdirSync(path.dirname(targetPath), { recursive: true });
   cpSync(sourcePath, targetPath, { recursive: true });
 
-  console.log(`Component "${name}" installed to src/components/${name}`);
+  console.log(`"${name}" installed to ${targetDisplayPath}`);
 };
 
-if (command !== 'add' || !componentName) {
-  console.log('Usage: shared-components add <component>');
+if (command !== 'add' || !itemName) {
+  console.log('Usage: shared-components add <component|abstracts>');
 } else {
-  installComponent(componentName);
+  installItem(itemName);
 }
