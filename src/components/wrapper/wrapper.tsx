@@ -7,9 +7,8 @@ type WrapperProps = {
   children: ReactNode;
 };
 
-function Wrapper({ children }: WrapperProps): React.JSX.Element {
+export default function Wrapper({ children }: WrapperProps): React.JSX.Element {
   return (
     <div className={s.wrapper}>{children}</div>
   );
 }
-export default Wrapper;

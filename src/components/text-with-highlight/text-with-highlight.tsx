@@ -6,7 +6,7 @@ type TextWithHighlightProps = {
   children?: string;
 } & ({ text: string; } | { children: string; });
 
-function TextWithHighlight({ text, children, highlightClass }: TextWithHighlightProps): React.JSX.Element {
+export default function TextWithHighlight({ text, children, highlightClass }: TextWithHighlightProps): React.JSX.Element {
   const content = text || children || '';
 
   const regex = /\\h(.*?)\\h/g;
@@ -25,5 +25,3 @@ function TextWithHighlight({ text, children, highlightClass }: TextWithHighlight
     </>
   );
 }
-
-export default TextWithHighlight;

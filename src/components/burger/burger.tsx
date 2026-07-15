@@ -11,7 +11,7 @@ type BurgerProps = {
   className: string;
 };
 
-function Burger(burgerProps: BurgerProps): React.JSX.Element {
+export default function Burger(burgerProps: BurgerProps): React.JSX.Element {
   const { className } = burgerProps;
   const dispatch = useAppDispatch();
 
@@ -35,4 +35,3 @@ function Burger(burgerProps: BurgerProps): React.JSX.Element {
     </button>
   );
 }
-export default Burger;

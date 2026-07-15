@@ -12,7 +12,7 @@ type BreadcrumbsProps = {
   className: string;
 };
 
-function Breadcrumbs(breadcrumbsProps: BreadcrumbsProps): React.JSX.Element {
+export default function Breadcrumbs(breadcrumbsProps: BreadcrumbsProps): React.JSX.Element {
 
   const { className } = breadcrumbsProps;
   const pathname = usePathname();
@@ -50,4 +50,3 @@ function Breadcrumbs(breadcrumbsProps: BreadcrumbsProps): React.JSX.Element {
     </ul>
   );
 }
-export default Breadcrumbs;

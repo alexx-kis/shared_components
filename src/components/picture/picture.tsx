@@ -62,7 +62,7 @@ const resolveBreakpointMap = (breakpoints: MediaPrefix[]): Map<MediaPrefix, Medi
 
 // $======================== Picture ========================$ //
 
-function Picture(pictureProps: PictureProps): React.JSX.Element {
+export default function Picture(pictureProps: PictureProps): React.JSX.Element {
   const {
     className,
     src: source,
@@ -136,5 +136,3 @@ function Picture(pictureProps: PictureProps): React.JSX.Element {
     </picture>
   );
 }
-
-export default Picture;

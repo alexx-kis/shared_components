@@ -19,7 +19,7 @@ type FileFieldProps = {
 
 const initialFileFieldState = { fileName: '', iconSrc: ICONS.addFile };
 
-function FileField(fileFieldProps: FileFieldProps): React.JSX.Element {
+export default function FileField(fileFieldProps: FileFieldProps): React.JSX.Element {
   const { className, name, placeholder, value, onFileFieldChange } = fileFieldProps;
   const fileInputRef = useRef<HTMLInputElement>(null);
   const fieldRef = useRef<HTMLDivElement>(null);
@@ -158,5 +158,3 @@ function FileField(fileFieldProps: FileFieldProps): React.JSX.Element {
     </div>
   );
 }
-
-export default FileField;

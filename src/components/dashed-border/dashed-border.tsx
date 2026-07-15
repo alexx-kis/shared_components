@@ -10,7 +10,7 @@ type DashedBorderProps = {
   strokeColor: string;
 };
 
-function DashedBorder(dashedBorderProps: DashedBorderProps): React.JSX.Element {
+export default function DashedBorder(dashedBorderProps: DashedBorderProps): React.JSX.Element {
 
   const { borderRadius, dasharray, strokeColor } = dashedBorderProps;
 
@@ -69,4 +69,3 @@ function DashedBorder(dashedBorderProps: DashedBorderProps): React.JSX.Element {
     </div>
   );
 }
-export default DashedBorder;

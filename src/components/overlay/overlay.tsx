@@ -13,7 +13,7 @@ type OverlayProps = {
   className: string;
 };
 
-function Overlay(overlayProps: OverlayProps): React.JSX.Element {
+export default function Overlay(overlayProps: OverlayProps): React.JSX.Element {
 
   const { className } = overlayProps;
 
@@ -47,4 +47,3 @@ function Overlay(overlayProps: OverlayProps): React.JSX.Element {
     <div className={clsx(s.overlay, className)} onClick={handleOverlayClick} />
   );
 }
-export default Overlay;

@@ -12,7 +12,7 @@ type BreadcrumbProps = {
   href: string;
 };
 
-function Breadcrumb(breadcrumbProps: BreadcrumbProps): React.JSX.Element {
+export default function Breadcrumb(breadcrumbProps: BreadcrumbProps): React.JSX.Element {
 
   const { title, href } = breadcrumbProps;
   const pathname = usePathname();
@@ -31,4 +31,3 @@ function Breadcrumb(breadcrumbProps: BreadcrumbProps): React.JSX.Element {
     </Link>
   );
 }
-export default Breadcrumb;

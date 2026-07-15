@@ -23,7 +23,7 @@ type ButtonProps = CommonProps &
     disabled?: never;
   };
 
-function Button(buttonProps: ButtonProps) {
+export default function Button(buttonProps: ButtonProps) {
 
   const { className = '', active = false, children, href, onClick, ...props } = buttonProps;
 
@@ -57,4 +57,3 @@ function Button(buttonProps: ButtonProps) {
     </button>
   );
 }
-export default Button;

@@ -11,7 +11,7 @@ type BackgroundProps = {
   ref?: Ref<HTMLDivElement>;
 };
 
-function Background(backgroundProps: BackgroundProps): React.JSX.Element {
+export default function Background(backgroundProps: BackgroundProps): React.JSX.Element {
 
   const { className, style, children, ref } = backgroundProps;
 
@@ -25,4 +25,3 @@ function Background(backgroundProps: BackgroundProps): React.JSX.Element {
     </div>
   );
 }
-export default Background;

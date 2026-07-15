@@ -26,7 +26,7 @@ type SelectProps = {
   onSelectChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-function Select(selectProps: SelectProps): React.JSX.Element {
+export default function Select(selectProps: SelectProps): React.JSX.Element {
 
   const { classNames, iconSrc, iconSize, options, name, onSelectChange, value, placeholder } = selectProps;
 
@@ -136,4 +136,3 @@ function Select(selectProps: SelectProps): React.JSX.Element {
     </div>
   );
 }
-export default Select;

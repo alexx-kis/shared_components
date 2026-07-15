@@ -15,7 +15,7 @@ type CloseModalButtonProps = {
   onCloseModalButtonClick?: () => void;
 };
 
-function CloseModalButton(closeModalButtonProps: CloseModalButtonProps): React.JSX.Element {
+export default function CloseModalButton(closeModalButtonProps: CloseModalButtonProps): React.JSX.Element {
 
   const { className, iconSrc, iconSize: [width, height], modalName, onCloseModalButtonClick } = closeModalButtonProps;
 
@@ -42,4 +42,3 @@ function CloseModalButton(closeModalButtonProps: CloseModalButtonProps): React.J
     </button>
   );
 }
-export default CloseModalButton;

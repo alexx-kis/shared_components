@@ -20,7 +20,7 @@ type AccordionProps<H, B> = {
   isFirstTabOpen?: boolean;
 };
 
-const Accordion = <H, B>(accordionProps: AccordionProps<H, B>): React.JSX.Element => {
+export default function Accordion<H, B>(accordionProps: AccordionProps<H, B>): React.JSX.Element {
   const { className, tabClassName, data, renderHeader, renderBody, isFirstTabOpen } = accordionProps;
 
   const [activeTabIndex, setActiveTabIndex] = useState<number | null>(isFirstTabOpen ? 0 : null);
@@ -67,5 +67,3 @@ const Accordion = <H, B>(accordionProps: AccordionProps<H, B>): React.JSX.Elemen
     </ul>
   );
 };
-
-export default Accordion;

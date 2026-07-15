@@ -15,7 +15,7 @@ type CheckboxProps = {
   };
 };
 
-function Checkbox(checkboxProps: CheckboxProps): React.JSX.Element {
+export default function Checkbox(checkboxProps: CheckboxProps): React.JSX.Element {
 
   const { className, name, checked, errorMessage, onCheckboxChange, icons } = checkboxProps;
   const iconSrc = checked ? icons.checked : icons.empty;
@@ -42,4 +42,3 @@ function Checkbox(checkboxProps: CheckboxProps): React.JSX.Element {
     </div>
   );
 }
-export default Checkbox;
