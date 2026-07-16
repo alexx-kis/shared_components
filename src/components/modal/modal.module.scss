@@ -18,12 +18,7 @@
   &._open {
     visibility: visible;
     opacity: 1;
-
-    .inner {
-      scale: 1;
-    }
   }
-
 }
 
 .inner {
@@ -36,7 +31,6 @@
   position: absolute;
   inset: 0;
   overflow: auto;
-  border-radius: 16px;
   cursor: auto;
   scale: 0;
   transition: all 250ms;
