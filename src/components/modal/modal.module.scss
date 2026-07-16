@@ -1,5 +1,3 @@
-@use '../../../styles/abstracts' as *;
-
 // $======================== modal ========================$ //
 
 .modal {
@@ -23,10 +21,6 @@
 
     .inner {
       scale: 1;
-
-      @include MIDDLE {
-        translate: 0;
-      }
     }
   }
 
@@ -43,19 +37,9 @@
   inset: 0;
   overflow: auto;
   border-radius: 16px;
-  background-color: #fff;
   cursor: auto;
   scale: 0;
   transition: all 250ms;
-
-  @include MIDDLE {
-    max-width: 100%;
-    width: 100% !important;
-    margin-bottom: 0;
-    border-radius: 16px 16px 0 0;
-    scale: 1;
-    translate: 0 100%;
-  }
 }
 
 .close-button {
