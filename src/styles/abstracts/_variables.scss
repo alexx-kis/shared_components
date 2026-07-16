@@ -20,5 +20,6 @@ $mobRatio: calc($MID_WIDTH / $MOB_WIDTH);
 $DESK_HEIGHT: calc($DESK_WIDTH / $WIDESCREEN);
 $TAB_HEIGHT: calc($TAB_WIDTH / $tabAsp);
 
-// %------------ colors ------------% //
+$ADAPT_WIDTH: null !default;
 
+// %------------ colors ------------% //

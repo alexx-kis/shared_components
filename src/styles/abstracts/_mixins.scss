@@ -15,15 +15,6 @@
   border-radius: 50%;
 }
 
-// %------------ adapt property ------------% //
-@mixin adapt($property, $desk, $tab, $mob) {
-  #{$property}: desk($desk, $tab);
-
-  @media (width <=$TAB_WIDTH) {
-    #{$property}: tab($tab, $mob);
-  }
-}
-
 // %------------ hide scrollbar ------------% //
 @mixin hide-scrollbar {
   &::-webkit-scrollbar {
@@ -56,43 +47,21 @@
   opacity: 0;
 }
 
-// %------------ media queries ------------% // 
-@mixin DESKTOP() {
-  @media (max-width: $DESK_WIDTH) {
+// %------------ MEDIA ------------% //
+
+@mixin MEDIA($width) {
+  $previous-width: $ADAPT_WIDTH;
+
+  $ADAPT_WIDTH: $width !global;
+
+  @media (max-width: $width) {
     @content;
   }
+
+  $ADAPT_WIDTH: $previous-width !global;
 }
 
-@mixin CONTAINER() {
-  @media (max-width: $CONT_WIDTH) {
-    @content;
-  }
-}
-
-@mixin LAPTOP() {
-  @media (max-width: $LAP_WIDTH) {
-    @content;
-  }
-}
-
-@mixin TABLET() {
-  @media (max-width: $TAB_WIDTH) {
-    @content;
-  }
-}
-
-@mixin MIDDLE() {
-  @media (max-width: $MID_WIDTH) {
-    @content;
-  }
-}
-
-@mixin MOBILE() {
-  @media (max-width: $MOB_WIDTH) {
-    @content;
-  }
-}
-
+// %------------ hover ------------% //
 @mixin HOVER() {
   @media (hover:hover) {
     &:hover {

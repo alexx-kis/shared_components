@@ -19,6 +19,7 @@
 
   @return max($a, $b);
 }
+
 //@ negative
 @function neg($value) {
   @return calc(-1 * $value);
@@ -75,39 +76,6 @@
   @return Max(toVW($max, $viewportWidth), $min);
 }
 
-// %------------ adapt to specific viewport widths ------------% //
-@function fhd($max, $min) {
-  @return vw-max($max, $min, $FULLHD_WIDTH);
-}
-
-@function desk($max, $min: null) {
-  @if $min ==null {
-    @return vw-max($max, $max, $DESK_WIDTH);
-  }
-
-  @return vw-max($max, $min, $DESK_WIDTH);
-}
-
-@function cont($max, $min) {
-  @return vw-max($max, $min, $CONT_WIDTH);
-}
-
-@function lap($max, $min) {
-  @return vw-max($max, $min, $LAP_WIDTH);
-}
-
-@function tab($max, $min) {
-  @return vw-max($max, $min, $TAB_WIDTH);
-}
-
-@function mid($max, $min) {
-  @return vw-max($max, $min, $MID_WIDTH);
-}
-
-@function mob($max, $min) {
-  @return vw-max($max, $min, $MOB_WIDTH);
-}
-
 // %------------ adapt to custom viewport height ------------% //
 // % (viewport height max)
 @function dvh-max($max, $min, $viewportHeight) {
@@ -127,4 +95,14 @@
   $byW: vw-max($initialValue, $minW, $viewportW);
   $byH: dvh-max($initialValue, $minH, $viewportH);
   @return min($byW, $byH);
+}
+
+// %------------ adapt ------------% //
+
+@function adapt($max, $min) {
+  @if $ADAPT_WIDTH ==null {
+    @error 'adapt() must be used inside MEDIA()';
+  }
+
+  @return vw-max($max, $min, $ADAPT_WIDTH);
 }
