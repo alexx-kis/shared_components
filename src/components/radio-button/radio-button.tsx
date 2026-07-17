@@ -10,18 +10,18 @@ type RadioButtonProps = {
   name: string;
   id?: string;
   value: string;
-  iconSrc: string;
+  iconSrcs: string[];
   onRadioButtonChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 function RadioButton(radioButtonProps: RadioButtonProps): React.JSX.Element {
-  const { className, checked, name, id, value, iconSrc, onRadioButtonChange } = radioButtonProps;
+  const { className, checked, name, id, value, iconSrcs, onRadioButtonChange } = radioButtonProps;
 
   return (
     <label
       className={clsx(className ?? '', s['radio-button'])}
       style={{
-        backgroundImage: `url(${iconSrc}${checked ? 'Checked' : 'Empty'}`,
+        backgroundImage: `url(${checked ? iconSrcs[1] : iconSrcs[0]}`,
       }}
     >
       <input type='radio' name={name} onChange={onRadioButtonChange} id={id} checked={checked} value={value} />
