@@ -14,7 +14,7 @@ type RadioButtonProps = {
   onRadioButtonChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-function RadioButton(radioButtonProps: RadioButtonProps): React.JSX.Element {
+export default function RadioButton(radioButtonProps: RadioButtonProps): React.JSX.Element {
   const { className, checked, name, id, value, iconSrcs, onRadioButtonChange } = radioButtonProps;
 
   return (
@@ -28,4 +28,3 @@ function RadioButton(radioButtonProps: RadioButtonProps): React.JSX.Element {
     </label>
   );
 }
-export default RadioButton;

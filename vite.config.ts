@@ -20,9 +20,10 @@ export default defineConfig(({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@use '@/styles/abstracts' as *;`,
+          additionalData: `@use 'abstracts' as *;`,
+          loadPaths: [path.resolve(__dirname, 'src/styles')],
         },
       },
-    }
+    },
   };
 });
