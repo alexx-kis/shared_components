@@ -1,0 +1,19 @@
+@use '../../../styles/abstracts' as *;
+
+// ^======================== radio-button ========================^ //
+
+.radio-button {
+  flex-shrink: 0;
+  display: block;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: background-image 250ms;
+  @include square(24px);
+
+  input {
+    position: absolute;
+    opacity: 0;
+    z-index: calc(-Infinity);
+  }
+}
