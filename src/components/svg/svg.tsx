@@ -1,6 +1,6 @@
 'use client';
 
-import { CSSProperties, useEffect, useState } from 'react';
+import { type CSSProperties, useEffect, useState } from 'react';
 
 // ^======================== Svg ========================^ //
 

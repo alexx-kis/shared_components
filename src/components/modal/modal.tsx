@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import { type MouseEvent, type ReactNode, useEffect, useRef, useState } from 'react';
 import { OPEN_MODAL_INITIAL_Z_INDEX, type OpenElement } from '../../constants/const';
-import { dropOpenElement, getOpenElements } from '../../store/slices/open-element.process';
+import { dropOpenElement, getOpenElements } from '../../store/slices/open-element.slice';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
 import { isEscapeKey } from '../../utils/utils';
 import CloseModalButton from '../close-modal-button/close-modal-button';

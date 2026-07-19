@@ -2,8 +2,7 @@ import { ViewportWidth } from '@/constants/const';
 import { ICONS } from '@/constants/images';
 import { vwm } from '@/utils/utils';
 import clsx from 'clsx';
-import Image from 'next/image';
-import { ChangeEvent, DragEvent, MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { type ChangeEvent, type DragEvent, type MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
 import DashedBorder from '../dashed-border/dashed-border';
 import s from './file-field.module.scss';
 
@@ -121,7 +120,7 @@ export default function FileField(fileFieldProps: FileFieldProps): React.JSX.Ele
         htmlFor='file-field-input'
         className={s.label}
       >
-        <Image
+        <img
           className={s.icon}
           src={fileFieldState.iconSrc}
           width={24}
@@ -138,7 +137,7 @@ export default function FileField(fileFieldProps: FileFieldProps): React.JSX.Ele
           className={s['remove-button']}
           onClick={handleRemoveButtonClick}
         >
-          <Image
+          <img
             src={ICONS.redCross}
             alt=''
             width={12}

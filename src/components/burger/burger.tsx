@@ -1,8 +1,7 @@
 import { OpenElement } from '@/constants/const';
 import { ICONS } from '@/constants/images';
-import { addOpenElement } from '@/store/processes/open-element.process';
+import { addOpenElement } from '@/store/slices/open-element.slice';
 import { useAppDispatch } from '@/store/store-hooks';
-import Image from 'next/image';
 import './burger.scss';
 
 // ^======================== Burger ========================^ //
@@ -25,7 +24,7 @@ export default function Burger(burgerProps: BurgerProps): React.JSX.Element {
       className={`${className} burger`}
       onClick={handleBurgerClick}
     >
-      <Image
+      <img
         className='burger__icon'
         src={ICONS.burger}
         alt='open menu'

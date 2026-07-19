@@ -1,15 +1,10 @@
 import Providers from './components/utility/providers/providers';
 import Wrapper from './components/wrapper/wrapper';
 
-function App() {
-
+export default function App() {
   return (
     <Providers>
-      <Wrapper>
-        {''}
-      </Wrapper>
+      <Wrapper>{''}</Wrapper>
     </Providers>
   );
 }
-
-export default App;

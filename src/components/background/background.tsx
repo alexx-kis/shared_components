@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode, Ref } from 'react';
+import { type CSSProperties, type ReactNode, type Ref } from 'react';
 import s from './background.module.scss'
 import clsx from 'clsx';
 

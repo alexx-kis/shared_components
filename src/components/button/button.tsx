@@ -1,9 +1,9 @@
 'use client'
 
 import clsx from 'clsx';
-import { MouseEvent, ReactNode } from 'react';
+import { type MouseEvent, type ReactNode } from 'react';
 import './button.scss';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 // ^======================== Button ========================^ //
 
@@ -34,7 +34,7 @@ export default function Button(buttonProps: ButtonProps) {
   if (href) {
     const isInternalLink = href.startsWith('/');
     return isInternalLink ? (
-      <Link href={href} {...commonProps} {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}>
+      <Link to={href} {...commonProps} {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}>
         {children}
       </Link>
     ) : (

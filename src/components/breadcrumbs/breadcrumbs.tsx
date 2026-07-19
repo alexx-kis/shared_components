@@ -1,7 +1,7 @@
 'use client';
 
 import { AppRoute, PagesNames } from '@/constants/const';
-import { usePathname } from 'next/navigation';
+import { useLocation } from 'react-router-dom';
 import Breadcrumb from '../breadcrumb/breadcrumb';
 import s from './breadcrumbs.module.scss';
 import clsx from 'clsx';
@@ -15,7 +15,7 @@ type BreadcrumbsProps = {
 export default function Breadcrumbs(breadcrumbsProps: BreadcrumbsProps): React.JSX.Element {
 
   const { className } = breadcrumbsProps;
-  const pathname = usePathname();
+  const { pathname } = useLocation();
   const rawPathnames = pathname.split('/').slice(1); // remove first empty segment
 
   // Remove trailing empty string
@@ -38,7 +38,7 @@ export default function Breadcrumbs(breadcrumbsProps: BreadcrumbsProps): React.J
           href={AppRoute.HOME}
         />
       </li>
-      {pathnamesWithoutLast.map((href) => (
+      {pathnamesWithoutLast.map((href: string) => (
         <li key={href} className='breadcrumbs__item'>
           <Breadcrumb
             title={PagesNames[`/${href}/` as keyof typeof PagesNames]}

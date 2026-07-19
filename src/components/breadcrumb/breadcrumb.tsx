@@ -1,8 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, useLocation } from 'react-router-dom';
 import s from './breadcrumb.module.scss';
 
 // ^======================== Breadcrumb ========================^ //
@@ -15,7 +14,7 @@ type BreadcrumbProps = {
 export default function Breadcrumb(breadcrumbProps: BreadcrumbProps): React.JSX.Element {
 
   const { title, href } = breadcrumbProps;
-  const pathname = usePathname();
+  const { pathname } = useLocation();
 
   const pathnames = pathname.split('/').slice(0, -1);
 
@@ -25,7 +24,7 @@ export default function Breadcrumb(breadcrumbProps: BreadcrumbProps): React.JSX.
         s.breadcrumb,
         { [s._active]: `/${pathnames[pathnames.length - 1]}/` === href }
       )}
-      href={href}
+      to={href}
     >
       {title}
     </Link>
