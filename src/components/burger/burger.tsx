@@ -2,7 +2,8 @@ import { OpenElement } from '@/constants/const';
 import { ICONS } from '@/constants/images';
 import { addOpenElement } from '@/store/slices/open-element.slice';
 import { useAppDispatch } from '@/store/store-hooks';
-import './burger.scss';
+import clsx from 'clsx';
+import s from './burger.module.scss';
 
 // ^======================== Burger ========================^ //
 
@@ -19,18 +20,8 @@ export default function Burger(burgerProps: BurgerProps): React.JSX.Element {
   };
 
   return (
-    <button
-      type='button'
-      className={`${className} burger`}
-      onClick={handleBurgerClick}
-    >
-      <img
-        className='burger__icon'
-        src={ICONS.burger}
-        alt='open menu'
-        width={28}
-        height={28}
-      />
+    <button type='button' className={clsx(s.burger, className)} onClick={handleBurgerClick}>
+      <img className={s.icon} src={ICONS.burger} alt='open menu' width={28} height={28} />
     </button>
   );
 }

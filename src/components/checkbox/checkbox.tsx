@@ -16,28 +16,16 @@ type CheckboxProps = {
 };
 
 export default function Checkbox(checkboxProps: CheckboxProps): React.JSX.Element {
-
   const { className, name, checked, errorMessage, onCheckboxChange, icons } = checkboxProps;
   const iconSrc = checked ? icons.checked : icons.empty;
 
   const handleCheckboxChange = () => onCheckboxChange(!checked);
 
   return (
-    <div
-      className={clsx(className, s.checkbox,
-        { '_invalid': errorMessage }
-      )}
-    >
+    <div className={clsx(className, s.checkbox, { [s._invalid]: errorMessage })}>
       <label className={s.label}>
-        <input
-          type='checkbox'
-          name={name}
-          onChange={handleCheckboxChange}
-        />
-        <span className={s.icon}
-          style={{ backgroundImage: `url(${iconSrc})` }}
-        >
-        </span>
+        <input type='checkbox' name={name} onChange={handleCheckboxChange} />
+        <span className={s.icon} style={{ backgroundImage: `url(${iconSrc})` }}></span>
       </label>
     </div>
   );

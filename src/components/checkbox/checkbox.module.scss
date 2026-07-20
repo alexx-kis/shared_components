@@ -20,12 +20,6 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: desk(14px);
-  color: $darkGray50;
-
-  @include TABLET {
-    font-size: tab(14px, 10px);
-  }
 }
 
 .icon {
@@ -34,6 +28,5 @@
   transition: all 250ms;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  @include square(desk(16px));
-  margin-right: desk(10px);
+  @include square(24px);
 }
