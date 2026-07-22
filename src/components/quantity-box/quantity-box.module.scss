@@ -1,0 +1,49 @@
+.quantity-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.button {
+  background-color: #0f0;
+  position: relative;
+  transition: all 250ms;
+
+  &::before,
+  &:after {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 1px;
+    position: absolute;
+    background-color: #000;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    transition: all 250ms;
+  }
+
+  &._minus {
+    &::after {
+      display: none;
+    }
+
+    &._disabled {
+      background-color: #333;
+
+      &::before {
+        background-color: #0f0;
+      }
+    }
+  }
+
+  &._plus {
+    &::after {
+      rotate: 90deg;
+    }
+  }
+}
+
+.value {
+  text-align: center;
+}
