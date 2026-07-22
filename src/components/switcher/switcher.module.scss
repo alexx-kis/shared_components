@@ -1,0 +1,29 @@
+// ^======================== switcher ========================^ //
+
+.switcher {
+  width: 60px;
+  height: 32px;
+  overflow: clip;
+  border-radius: 80px;
+  transition: all 250ms;
+
+  &._active {
+
+    .handler {
+      translate: 100%;
+    }
+  }
+
+  &._disabled {
+    cursor: auto;
+
+    .handler {}
+  }
+}
+
+.handler {
+  border-radius: 50%;
+  box-shadow: 0 3px 3px 0 #00000033;
+  transition: all 250ms;
+  @include square(28px);
+}
