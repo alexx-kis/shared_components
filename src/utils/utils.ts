@@ -5,7 +5,7 @@ export const isEscapeKey = (event: KeyboardEvent) => event.key === 'Escape';
 
 export const getRandomNumber = (min: number, max: number): number => Math.floor(Math.random() * (max - min) + min);
 
-export const toCamelCase = (str: string): string => str.replace(/-./g, (x) => x[1].toUpperCase());
+export const toCamelCase = (str: string): string => str.replace(/[-_][a-z]/gi, (x) => x[1].toUpperCase());
 export const toKebabCase = (str: string): string => str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 
 // %------------------------ generate paths for images ------------------------% //
