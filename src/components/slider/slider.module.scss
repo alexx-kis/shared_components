@@ -1,0 +1,41 @@
+.slider {
+  width: $DESK_WIDTH;
+  padding-inline: 20px;
+  left: -20px;
+
+  @include MEDIA($CONT_WIDTH) {
+    width: 100vw;
+  }
+
+  @include MEDIA($TAB_WIDTH) {
+    padding-inline: adapt(20px, 12px);
+    left: neg(adapt(20px, 12px));
+
+  }
+}
+
+.slider-track {
+  overflow: visible !important;
+  height: 100%;
+}
+
+.slide {
+  overflow: clip;
+  border-radius: 20px;
+
+  &:not(:last-child) {
+    margin-right: 12px;
+
+    @include MEDIA($CONT_WIDTH) {
+      margin-right: adapt(12px, 8px);
+    }
+  }
+
+  @include MEDIA($TAB_WIDTH) {
+    width: 90%;
+  }
+
+  @include MEDIA($MID_WIDTH) {
+    width: 99%;
+  }
+}
