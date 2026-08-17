@@ -1,0 +1,30 @@
+// ^======================== text ========================^ //
+
+.text {
+  color: var(--secondary);
+
+  &._large {
+    font-size: 18px;
+    line-height: 24px;
+
+    @include MEDIA($CONT_WIDTH) {
+      font-size: adapt(18px, 16px);
+      line-height: adapt(24px, 22px);
+    }
+  }
+
+  &._regular {
+    font-size: 16px;
+    line-height: 22px;
+
+    @include MEDIA($CONT_WIDTH) {
+      font-size: adapt(16px, 14px);
+      line-height: adapt(22px, 20px);
+    }
+  }
+
+  &._small {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}

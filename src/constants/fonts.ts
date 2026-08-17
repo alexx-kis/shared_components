@@ -1,3 +1,5 @@
+// import localFont from 'next/font/local';
+
 // %======================== fonts ========================% //
 
 // export const {fontName} = localFont({
