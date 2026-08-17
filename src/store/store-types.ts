@@ -6,17 +6,13 @@ import type { store } from './store';
 export type AppState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export type Process = {
-  field: string;
-};
-
 export type AppAsyncThunk = {
   dispatch: AppDispatch;
   state: AppState;
   extra: AxiosInstance;
 };
 
-// %------------------------ processes ------------------------% //
-export type OpenElementsProcess = {
-  openElements: (string | null)[];
+// %------------------------ slices ------------------------% //
+export type OpenModalsSlice = {
+  openModals: (string | null)[];
 };

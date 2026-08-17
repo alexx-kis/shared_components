@@ -5,7 +5,7 @@ export const PREFIX = '';
 // %------------------------ routing ------------------------% //
 export enum AppRoute {
   HOME = '/',
-};
+}
 export const PagesNames = {
   [AppRoute.HOME]: 'Главная',
 };
@@ -43,8 +43,7 @@ export enum MediaPrefix {
 
 // %------------------------ store ------------------------% //
 export enum NameSpace {
-  PROCESS = 'PROCESS',
-  OPEN_ELEMENTS = 'OPEN_ELEMENTS'
+  OPEN_MODALS = 'OPEN_MODALS',
 }
 
 export enum OpenElement {

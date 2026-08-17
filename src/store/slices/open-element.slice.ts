@@ -1,39 +1,35 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { NameSpace } from '../../constants/const';
-import type { OpenElementsProcess } from '../store-types';
+import type { OpenModalsSlice } from '../store-types';
 
-// %======================== openElementProcess ========================% //
+// %======================== openModalsSlice ========================% //
 
-const initialState: OpenElementsProcess = {
-  openElements: [],
+const initialState: OpenModalsSlice = {
+  openModals: [],
 };
 
-export const openElementProcess = createSlice({
-  name: NameSpace.OPEN_ELEMENTS,
+export const openModalsSlice = createSlice({
+  name: NameSpace.OPEN_MODALS,
   initialState,
   reducers: {
-    addOpenElement: (state, action: PayloadAction<string>) => {
-      if (state.openElements.includes(action.payload)) return;
-      state.openElements.push(action.payload);
+    addOpenModal: (state, action: PayloadAction<string>) => {
+      if (state.openModals.includes(action.payload)) return;
+      state.openModals.push(action.payload);
       document.body.style.overflow = 'hidden';
     },
-    dropOpenElement: (state, action) => {
-      const index = state.openElements.indexOf(action.payload);
+    dropOpenModal: (state, action) => {
+      const index = state.openModals.indexOf(action.payload);
       if (index !== -1) {
-        state.openElements.splice(index, 1);
+        state.openModals.splice(index, 1);
       }
       document.body.style.overflow = '';
     },
   },
   selectors: {
-    getOpenElements: (state) => state.openElements,
-  }
+    getOpenModals: (state) => state.openModals,
+  },
 });
 
+export const { addOpenModal, dropOpenModal } = openModalsSlice.actions;
 
-export const {
-  addOpenElement,
-  dropOpenElement,
-} = openElementProcess.actions;
-
-export const { getOpenElements } = openElementProcess.selectors;
+export const { getOpenModals } = openModalsSlice.selectors;

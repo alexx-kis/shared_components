@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
 import clsx from 'clsx';
 import { type MouseEvent, type ReactNode } from 'react';
-import './button.scss';
 import { Link } from 'react-router-dom';
+import s from './button.module.scss';
 
 // ^======================== Button ========================^ //
 
@@ -14,21 +14,22 @@ type CommonProps = {
   onClick?: (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
 };
 
-type ButtonProps = CommonProps &
-  React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    href?: never;
-  } | CommonProps &
-  React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-    href: string;
-    disabled?: never;
-  };
+type ButtonProps =
+  | (CommonProps &
+      React.ButtonHTMLAttributes<HTMLButtonElement> & {
+        href?: never;
+      })
+  | (CommonProps &
+      React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+        href: string;
+        disabled?: never;
+      });
 
 export default function Button(buttonProps: ButtonProps) {
-
   const { className = '', active = false, children, href, onClick, ...props } = buttonProps;
 
   const commonProps = {
-    className: clsx('button', className, { active }),
+    className: clsx(s.button, className, { active }),
   };
 
   if (href) {
