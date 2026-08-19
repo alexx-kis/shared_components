@@ -1,4 +1,4 @@
-import { OpenElement } from '@/constants/const';
+import { ModalElement } from '@/constants/const';
 import { ICONS } from '@/constants/images';
 import { addOpenElement } from '@/store/slices/open-modals.slice';
 import { useAppDispatch } from '@/store/store-hooks';
@@ -16,7 +16,7 @@ export default function Burger(burgerProps: BurgerProps): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleBurgerClick = () => {
-    dispatch(addOpenElement(OpenElement.ASIDE));
+    dispatch(addOpenElement(ModalElement.ASIDE));
   };
 
   return (

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { OpenElement } from '../../constants/const';
+import type { ModalElement } from '../../constants/const';
 import { dropOpenElement } from '../../store/slices/open-modals.slice';
 import { useAppDispatch } from '../../store/store-hooks';
 import s from './close-modal-button.module.scss';
@@ -10,7 +10,7 @@ type CloseModalButtonProps = {
   className: string;
   iconSrc: string;
   iconSize: [number, number];
-  modalName?: OpenElement;
+  modalName?: ModalElement;
   onCloseModalButtonClick?: () => void;
 };
 

@@ -46,8 +46,7 @@ export enum NameSpace {
   OPEN_MODALS = 'OPEN_MODALS',
 }
 
-export enum OpenElement {
-  OPEN_ELEMENT = 'OPEN_ELEMENT',
+export enum ModalElement {
   ASIDE = 'ASIDE',
 }
 

@@ -3,8 +3,8 @@
 import clsx from 'clsx';
 
 import { dropOpenModal, getOpenModals } from '@/store/slices/open-modals.slice';
-import { type MouseEvent, type ReactNode, useEffect, useRef, useState } from 'react';
-import { OPEN_MODAL_INITIAL_Z_INDEX, type OpenElement } from '../../constants/const';
+import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
+import { OPEN_MODAL_INITIAL_Z_INDEX, type ModalElement } from '../../constants/const';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
 import { isEscapeKey } from '../../utils/utils';
 import CloseModalButton from '../close-modal-button/close-modal-button';
@@ -14,12 +14,13 @@ import s from './modal.module.scss';
 
 type ModalProps = {
   className: string;
-  name: OpenElement;
+  innerClassName?: string;
+  name: ModalElement;
   children: ReactNode;
 };
 
 export default function Modal(modalProps: ModalProps): React.JSX.Element {
-  const { className, name, children } = modalProps;
+  const { className, innerClassName, name, children } = modalProps;
 
   const dispatch = useAppDispatch();
   const openModals = useAppSelector(getOpenModals);
@@ -70,12 +71,12 @@ export default function Modal(modalProps: ModalProps): React.JSX.Element {
 
   return (
     <dialog
-      className={clsx(s.modal, { [s._open]: openModals.includes(name) })}
+      className={clsx(s.modal, className, { [s._open]: openModals.includes(name) })}
       onMouseDown={handleModalMouseDown}
       onClick={handleModalClick}
       style={{ zIndex: zIndex }}
     >
-      <div className={clsx(s.inner, className)}>
+      <div className={clsx(s.inner, innerClassName)}>
         <CloseModalButton
           className={s['close-button']}
           onCloseModalButtonClick={handleClose}
