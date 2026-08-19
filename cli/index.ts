@@ -24,6 +24,10 @@ const items: Record<string, InstallableItem> = {
     source: ['src', 'services'],
     target: ['src', 'services'],
   },
+  scripts: {
+    source: ['/', 'scripts'],
+    target: ['/', 'scripts'],
+  },
 };
 
 const installItem = (name: string): void => {
