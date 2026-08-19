@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { NameSpace } from '../constants/const';
-import { openModalsSlice } from './slices/open-element.slice';
+import { openModalsSlice } from './slices/open-modals.slice';
 
 // %======================== rootReducer ========================% //
 

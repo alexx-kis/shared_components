@@ -1,7 +1,6 @@
-
 import clsx from 'clsx';
 import type { OpenElement } from '../../constants/const';
-import { dropOpenElement } from '../../store/slices/open-element.slice';
+import { dropOpenElement } from '../../store/slices/open-modals.slice';
 import { useAppDispatch } from '../../store/store-hooks';
 import s from './close-modal-button.module.scss';
 
@@ -16,8 +15,13 @@ type CloseModalButtonProps = {
 };
 
 export default function CloseModalButton(closeModalButtonProps: CloseModalButtonProps): React.JSX.Element {
-
-  const { className, iconSrc, iconSize: [width, height], modalName, onCloseModalButtonClick } = closeModalButtonProps;
+  const {
+    className,
+    iconSrc,
+    iconSize: [width, height],
+    modalName,
+    onCloseModalButtonClick,
+  } = closeModalButtonProps;
 
   const dispatch = useAppDispatch();
 
@@ -27,18 +31,9 @@ export default function CloseModalButton(closeModalButtonProps: CloseModalButton
   };
 
   return (
-    <button
-      type='button'
-      className={clsx(className, s['close-modal-button'])}
-      onClick={handleCloseModalButtonClick}
-    >
+    <button type='button' className={clsx(className, s['close-modal-button'])} onClick={handleCloseModalButtonClick}>
       {/* Image or img */}
-      <img
-        src={iconSrc}
-        alt=''
-        width={width}
-        height={height}
-      />
+      <img src={iconSrc} alt='' width={width} height={height} />
     </button>
   );
 }

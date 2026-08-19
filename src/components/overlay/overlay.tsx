@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { useEffect } from 'react';
-import { dropOpenElement, getOpenElements } from '../../store/slices/open-element.slice';
+import { dropOpenElement, getOpenElements } from '../../store/slices/open-modals.slice';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
 import { isEscapeKey } from '../../utils/utils';
 import s from './overlay.module.scss';
@@ -14,7 +14,6 @@ type OverlayProps = {
 };
 
 export default function Overlay(overlayProps: OverlayProps): React.JSX.Element {
-
   const { className } = overlayProps;
 
   const dispatch = useAppDispatch();
@@ -43,7 +42,5 @@ export default function Overlay(overlayProps: OverlayProps): React.JSX.Element {
     dispatch(dropOpenElement(lastOpenElement));
   };
 
-  return (
-    <div className={clsx(s.overlay, className)} onClick={handleOverlayClick} />
-  );
+  return <div className={clsx(s.overlay, className)} onClick={handleOverlayClick} />;
 }

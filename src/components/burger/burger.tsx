@@ -1,6 +1,6 @@
 import { OpenElement } from '@/constants/const';
 import { ICONS } from '@/constants/images';
-import { addOpenElement } from '@/store/slices/open-element.slice';
+import { addOpenElement } from '@/store/slices/open-modals.slice';
 import { useAppDispatch } from '@/store/store-hooks';
 import clsx from 'clsx';
 import s from './burger.module.scss';
