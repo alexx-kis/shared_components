@@ -7,6 +7,11 @@ export const getRandomNumber = (min: number, max: number): number => Math.floor(
 
 export const toCamelCase = (str: string): string => str.replace(/[-_][a-z]/gi, (x) => x[1].toUpperCase());
 export const toKebabCase = (str: string): string => str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+export const toSnakeCase = (str: string) =>
+  str
+    .replace(/([a-z0-9])([A-Z])/g, '$1_$2')
+    .replace(/-/g, '_')
+    .toLowerCase();
 
 // %------------------------ generate paths for images ------------------------% //
 export const generatePaths = (basePath: string, endPaths: string[], extension?: string): Record<string, string> => {
@@ -105,6 +110,48 @@ export const convertKeysToCamelCase = (() => {
     };
 
     return inner(obj) as SnakeToCamelCase<T>;
+  };
+
+  return convert;
+})();
+
+// %------------------------ convertKeysToSnake_Case ------------------------% //
+export const convertKeysToSnakeCase = (() => {
+  type SnakeCasedKey<K extends string> = K extends `${infer A}${infer B}`
+    ? B extends Uncapitalize<B>
+      ? `${Lowercase<A>}${SnakeCasedKey<B>}`
+      : `${Lowercase<A>}_${SnakeCasedKey<B>}`
+    : K;
+
+  type CamelToSnakeCase<T> =
+    T extends Array<infer U>
+      ? Array<CamelToSnakeCase<U>>
+      : T extends object
+        ? { [K in keyof T as K extends string ? SnakeCasedKey<K> : K]: CamelToSnakeCase<T[K]> }
+        : T;
+
+  const convert = <T>(obj: T) => {
+    const inner = (input: unknown): unknown => {
+      if (Array.isArray(input)) return input.map(inner);
+
+      if (input !== null && typeof input === 'object') {
+        return Object.keys(input).reduce(
+          (acc, key) => {
+            const value = (input as Record<string, unknown>)[key];
+            const snakeKey = toSnakeCase(key);
+
+            acc[snakeKey] = inner(value);
+
+            return acc;
+          },
+          {} as Record<string, unknown>,
+        );
+      }
+
+      return input;
+    };
+
+    return inner(obj) as CamelToSnakeCase<T>;
   };
 
   return convert;
