@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "type": "module",
   "bin": {
-    "shared-components": "./dist/cli/index.js"
+    "shared_components": "./dist/cli/index.js"
   },
   "files": [
     "dist",
