@@ -1,9 +1,8 @@
 'use client';
 
-import clsx from 'clsx';
-
 import { dropOpenModal, getOpenModals } from '@/store/slices/open-modals.slice';
-import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
+import clsx from 'clsx';
+import { useEffect, useRef, type MouseEvent, type ReactNode } from 'react';
 import { OPEN_MODAL_INITIAL_Z_INDEX, type ModalElement } from '../../constants/const';
 import { useAppDispatch, useAppSelector } from '../../store/store-hooks';
 import { isEscapeKey } from '../../utils/utils';
@@ -23,11 +22,14 @@ export default function Modal(modalProps: ModalProps): React.JSX.Element {
   const { className, innerClassName, name, children } = modalProps;
 
   const dispatch = useAppDispatch();
+
   const openModals = useAppSelector(getOpenModals);
 
-  const [zIndex, setZIndex] = useState<number | undefined>(undefined);
-
   const isOverlayMouseDownRef = useRef(false);
+
+  const modalIndex = openModals.indexOf(name);
+
+  const zIndex = modalIndex === -1 ? undefined : modalIndex + OPEN_MODAL_INITIAL_Z_INDEX;
 
   const handleClose = () => {
     dispatch(dropOpenModal(name));
@@ -39,6 +41,7 @@ export default function Modal(modalProps: ModalProps): React.JSX.Element {
 
   const handleModalClick = (e: MouseEvent<HTMLDialogElement>) => {
     if (!isOverlayMouseDownRef.current) return;
+
     if (e.target !== e.currentTarget) return;
 
     handleClose();
@@ -61,20 +64,12 @@ export default function Modal(modalProps: ModalProps): React.JSX.Element {
     };
   });
 
-  useEffect(() => {
-    if (openModals.indexOf(name) === -1) {
-      setZIndex(undefined);
-    } else {
-      setZIndex(openModals.indexOf(name) + OPEN_MODAL_INITIAL_Z_INDEX);
-    }
-  }, [openModals, name]);
-
   return (
     <dialog
       className={clsx(s.modal, className, { [s._open]: openModals.includes(name) })}
       onMouseDown={handleModalMouseDown}
       onClick={handleModalClick}
-      style={{ zIndex: zIndex }}
+      style={{ zIndex }}
     >
       <div className={clsx(s.inner, innerClassName)}>
         <CloseModalButton
@@ -83,6 +78,7 @@ export default function Modal(modalProps: ModalProps): React.JSX.Element {
           iconSrc=''
           iconSize={[24, 24]}
         />
+
         {children}
       </div>
     </dialog>

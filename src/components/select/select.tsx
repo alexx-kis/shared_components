@@ -27,14 +27,14 @@ type SelectProps = {
 };
 
 export default function Select(selectProps: SelectProps): React.JSX.Element {
-
   const { classNames, iconSrc, iconSize, options, name, onSelectChange, value, placeholder } = selectProps;
 
   const [isOpen, setIsOpen] = useState(false);
-  const [headerText, setHeaderText] = useState(placeholder);
 
   const selectRef = useRef<HTMLDivElement | null>(null);
   const selectBodyRef = useRef<HTMLDivElement | null>(null);
+
+  const headerText = value || placeholder;
 
   const openSelect = () => {
     setIsOpen(true);
@@ -56,7 +56,13 @@ export default function Select(selectProps: SelectProps): React.JSX.Element {
 
   const handleSelectHeaderClick = () => {
     if (isOpen) return closeSelect();
+
     openSelect();
+  };
+
+  const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onSelectChange(e);
+    closeSelect();
   };
 
   useEffect(() => {
@@ -75,29 +81,19 @@ export default function Select(selectProps: SelectProps): React.JSX.Element {
     };
 
     document.addEventListener('pointerdown', handleDocumentPointerDown);
-    return () => document.removeEventListener('pointerdown', handleDocumentPointerDown);
+
+    return () => {
+      document.removeEventListener('pointerdown', handleDocumentPointerDown);
+    };
   }, [isOpen]);
-
-  const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setHeaderText(e.target.value);
-    onSelectChange(e);
-    closeSelect();
-  };
-
-  useEffect(() => {
-    if (value) {
-      setHeaderText(value);
-      return;
-    }
-
-    setHeaderText(placeholder);
-  }, [value, placeholder]);
 
   return (
     <div
-      className={clsx(classNames.main, s.select,
+      className={clsx(
+        classNames.main,
+        s.select,
         { [s._active]: isOpen },
-        { [s._selected]: headerText !== placeholder }
+        { [s._selected]: headerText !== placeholder },
       )}
       ref={selectRef}
     >
@@ -105,21 +101,17 @@ export default function Select(selectProps: SelectProps): React.JSX.Element {
         type='button'
         className={clsx(s.header, classNames.header)}
         onClick={handleSelectHeaderClick}
-        aria-expanded={isOpen}>
+        aria-expanded={isOpen}
+      >
         <span className={clsx(s.value, classNames.value)}>{headerText}</span>
-        <SVG
-          className={clsx(s.icon, classNames.icon)}
-          src={iconSrc}
-          size={[iconSize]}
-        />
+
+        <SVG className={clsx(s.icon, classNames.icon)} src={iconSrc} size={[iconSize]} />
       </button>
+
       <div className={clsx(s.body, classNames.body)} ref={selectBodyRef}>
         <div className={clsx(s.options, classNames.options)}>
-          {options.map((option, index) =>
-            <label
-              key={`${option}-${index}`}
-              className={clsx(s.option, classNames.option)}
-            >
+          {options.map((option, index) => (
+            <label key={`${option}-${index}`} className={clsx(s.option, classNames.option)}>
               <input
                 className={s.input}
                 type='radio'
@@ -128,9 +120,10 @@ export default function Select(selectProps: SelectProps): React.JSX.Element {
                 checked={option === value}
                 onChange={handleOptionChange}
               />
+
               {option}
             </label>
-          )}
+          ))}
         </div>
       </div>
     </div>

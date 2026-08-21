@@ -1,8 +1,6 @@
-import { ViewportWidth } from '@/constants/const';
 import { ICONS } from '@/constants/images';
-import { vwm } from '@/utils/utils';
 import clsx from 'clsx';
-import { type ChangeEvent, type DragEvent, type MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { type ChangeEvent, type DragEvent, type MouseEvent, useEffect, useRef } from 'react';
 import DashedBorder from '../dashed-border/dashed-border';
 import s from './file-field.module.scss';
 
@@ -16,50 +14,30 @@ type FileFieldProps = {
   onFileFieldChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const initialFileFieldState = { fileName: '', iconSrc: ICONS.addFile };
+const BORDER_RADIUS = 8;
+const DASHARRAY = `${BORDER_RADIUS} ${BORDER_RADIUS}`;
 
 export default function FileField(fileFieldProps: FileFieldProps): React.JSX.Element {
   const { className, name, placeholder, value, onFileFieldChange } = fileFieldProps;
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const fieldRef = useRef<HTMLDivElement>(null);
 
-  const [fileFieldState, setFileFieldState] = useState({
-    fileName: '',
-    iconSrc: ICONS.addFile
-  });
-
-  const borderRadius = useRef(0);
-  const dasharray = useRef('');
-
-  useEffect(() => {
-    borderRadius.current = vwm(8, 8, ViewportWidth.DESKTOP);
-    dasharray.current = `${borderRadius.current} ${borderRadius.current}`;
-  }, []);
+  const fileName = value?.name ?? '';
+  const iconSrc = value ? ICONS.file : ICONS.addFile;
 
   const handleFileFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
-    const file = e.target.files ? e.target.files[0] : null;
-    if (file) {
-      setFileFieldState({
-        fileName: file.name,
-        iconSrc: ICONS.file
-      });
-    } else {
-      setFileFieldState(initialFileFieldState);
-    }
     onFileFieldChange(e);
   };
 
-  const clearFileField = useCallback(() => {
-    setFileFieldState(initialFileFieldState);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-  }, []);
-
   const handleRemoveButtonClick = (e: MouseEvent) => {
     e.stopPropagation();
-    clearFileField();
+
+    const input = fileInputRef.current;
+    if (input) {
+      input.value = '';
+    }
 
     const syntheticEvent = {
       target: {
@@ -73,78 +51,69 @@ export default function FileField(fileFieldProps: FileFieldProps): React.JSX.Ele
 
   const handleDragOver = (e: DragEvent) => {
     e.preventDefault();
-    if (fieldRef.current) {
-      fieldRef.current.classList.add('dragover');
-    }
+
+    const field = fieldRef.current;
+    if (!field) return;
+
+    field.classList.add('dragover');
   };
 
   const handleDragLeave = (e: DragEvent) => {
     e.preventDefault();
-    if (fieldRef.current) {
-      fieldRef.current.classList.remove('dragover');
-    }
+
+    const field = fieldRef.current;
+    if (!field) return;
+
+    field.classList.remove('dragover');
   };
 
   const handleDrop = (e: DragEvent) => {
     e.preventDefault();
-    if (fileInputRef.current) {
-      const dataTransfer = new DataTransfer();
-      Array.from(e.dataTransfer.files).forEach(file => dataTransfer.items.add(file));
-      fileInputRef.current.files = dataTransfer.files;
-      fileInputRef.current.dispatchEvent(new Event('change', { bubbles: true }));
-    }
+
+    const input = fileInputRef.current;
+    if (!input) return;
+
+    const dataTransfer = new DataTransfer();
+
+    Array.from(e.dataTransfer.files).forEach((file) => {
+      dataTransfer.items.add(file);
+    });
+
+    input.files = dataTransfer.files;
+    input.dispatchEvent(new Event('change', { bubbles: true }));
   };
 
   useEffect(() => {
-    if (value === null) {
-      clearFileField();
-    }
-  }, [value, clearFileField]);
+    if (value !== null) return;
+
+    const input = fileInputRef.current;
+    if (!input) return;
+
+    input.value = '';
+  }, [value]);
 
   return (
     <div
       ref={fieldRef}
-      className={clsx(className, s['file-field'], {[s['_file-added']]: fileFieldState.fileName})}
+      className={clsx(className, s['file-field'], {
+        [s['_file-added']]: fileName,
+      })}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      {!fileFieldState.fileName &&
-        <DashedBorder
-          borderRadius={borderRadius.current}
-          dasharray={dasharray.current}
-          strokeColor='#1818184d'
-        />
-      }
-      <label
-        htmlFor='file-field-input'
-        className={s.label}
-      >
-        <img
-          className={s.icon}
-          src={fileFieldState.iconSrc}
-          width={24}
-          height={24}
-          alt=''
-        />
-        {
-          fileFieldState.fileName
-            ? <p className={s['file-name']}>{fileFieldState.fileName}</p>
-            : <p className={s.placeholder}>{placeholder}</p>
-        }
-        <button
-          type='button'
-          className={s['remove-button']}
-          onClick={handleRemoveButtonClick}
-        >
-          <img
-            src={ICONS.redCross}
-            alt=''
-            width={12}
-            height={12}
-          />
+      {!fileName && <DashedBorder borderRadius={BORDER_RADIUS} dasharray={DASHARRAY} strokeColor='#1818184d' />}
+
+      <label htmlFor='file-field-input' className={s.label}>
+        <img className={s.icon} src={iconSrc} width={24} height={24} alt='' />
+
+        {fileName ? <p className={s['file-name']}>{fileName}</p> : <p className={s.placeholder}>{placeholder}</p>}
+
+        <button type='button' className={s['remove-button']} onClick={handleRemoveButtonClick}>
+          <img src={ICONS.redCross} alt='' width={12} height={12} />
         </button>
       </label>
+
       <input
         type='file'
         className={s.input}
@@ -152,7 +121,7 @@ export default function FileField(fileFieldProps: FileFieldProps): React.JSX.Ele
         name={name}
         ref={fileInputRef}
         id='file-field-input'
-        disabled={Boolean(fileFieldState.fileName)}
+        disabled={Boolean(fileName)}
       />
     </div>
   );
