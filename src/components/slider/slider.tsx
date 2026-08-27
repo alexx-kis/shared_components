@@ -14,10 +14,14 @@ interface SliderProps<S> {
   sliderRef?: RefObject<InstanceType<typeof Splide> | null>;
   renderSlide: (slide: S, index?: number) => React.ReactNode;
   data: S[];
+  options?: {
+    perPage?: number;
+    gap?: number;
+  };
 }
 
 export default function Slider<S>(props: SliderProps<S>) {
-  const { className, slideClassName, sliderRef, renderSlide, data } = props;
+  const { className, slideClassName, sliderRef, renderSlide, data, options } = props;
   return (
     <Splide
       ref={sliderRef}
@@ -26,6 +30,7 @@ export default function Slider<S>(props: SliderProps<S>) {
         autoWidth: true,
         arrows: false,
         pagination: false,
+        ...options,
       }}
       hasTrack={false}
     >

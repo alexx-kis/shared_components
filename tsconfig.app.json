@@ -19,6 +19,15 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@splidejs/react-splide": [
+        "./node_modules/@splidejs/react-splide/dist/types/index.d.ts"
+      ],
+      "@splidejs/react-splide/css/core": [
+        "./src/types/splide.d.ts"
+      ],
+      "@splidejs/react-splide/css": [
+        "./src/types/splide.d.ts"
       ]
     },
     "strict": true,
