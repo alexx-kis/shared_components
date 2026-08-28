@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import s from './heading.module.scss';
 
 // ^======================== Heading ========================^ //
@@ -17,6 +17,13 @@ const HEADING_TAG: Record<HeadingType, 'h1' | 'h2' | 'h3'> = {
   regular: 'h2',
   small: 'h3',
 };
+
+/**
+ * Heading sizes:
+ * - `main`: 18px / 16px / 16px
+ * - `regular`: 16px / 14px / 14px
+ * - `small`: 14px / 14px / 14px
+ */
 
 export default function Heading(props: HeadingProps) {
   const { type = 'regular', className, children } = props;

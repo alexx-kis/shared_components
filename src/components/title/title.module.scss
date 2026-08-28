@@ -1,18 +1,7 @@
 // ^======================== title ========================^ //
 
 .title {
-  color: var(--primary);
   font-weight: 500;
-
-  &._xx-large {
-    font-size: 48px;
-    line-height: 45px;
-
-    @include MEDIA($CONT_WIDTH) {
-      font-size: adapt(48px, 24px);
-      line-height: adapt(56px, 28px);
-    }
-  }
 
   &._x-large {
     font-size: 28px;
@@ -26,16 +15,6 @@
     @include MEDIA($CONT_WIDTH) {
       font-size: adapt(24px, 18px);
       line-height: adapt(28px, 20px);
-    }
-  }
-
-  &._large-alt {
-    font-size: 24px;
-    line-height: 28px;
-
-    @include MEDIA($TAB_WIDTH) {
-      font-size: adapt(24px, 18px);
-      line-height: adapt(28px, 24px);
     }
   }
 

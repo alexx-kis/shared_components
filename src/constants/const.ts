@@ -1,53 +1,19 @@
+import { AppRoute } from './enums';
+
 // %======================== const ========================% //
 
 export const PREFIX = '';
+export const OPEN_MODAL_INITIAL_Z_INDEX = 100;
 
 // %------------------------ routing ------------------------% //
-export enum AppRoute {
-  HOME = '/',
-}
+
 export const PagesNames = {
   [AppRoute.HOME]: 'Главная',
 };
 
-// %------------------------ rendering ------------------------% //
-export enum ViewportWidth {
-  FULLHD = 1920,
-  DESKTOP = 1440,
-  TABLET = 834,
-  MIDDLE = 577,
-  MOBILE = 600,
-}
-
-export enum MediaQuery {
-  DESKTOP = `(max-width: ${ViewportWidth.DESKTOP}px)`,
-  TABLET = `(max-width: ${ViewportWidth.TABLET}px)`,
-  MIDDLE = `(max-width: ${ViewportWidth.MIDDLE}px)`,
-  MOBILE = `(max-width: ${ViewportWidth.MOBILE}px)`,
-}
-
-export enum Ext {
-  PNG = '.png',
-  WEBP = '.webp',
-  SVG = '.svg',
-  GIF = '.gif',
-  JPEG = '.jpeg',
-}
-
-export enum MediaPrefix {
-  FULL = '_full',
-  DESK = '_desk',
-  TAB = '_tab',
-  MOB = '_mob',
-}
-
-// %------------------------ store ------------------------% //
-export enum NameSpace {
-  OPEN_MODALS = 'OPEN_MODALS',
-}
-
-export enum ModalElement {
-  ASIDE = 'ASIDE',
-}
-
-export const OPEN_MODAL_INITIAL_Z_INDEX = 100;
+// %------------------------ api ------------------------% //
+// export const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL ?? ''; // NEXTJS
+export const BACKEND_URL = import.meta.env.VITE_API_PATH; // VITE
+export const REQUEST_TIMEOUT = 5000;
+export const COOKIE_LABEL_TIMEOUT = 3000;
+export const COOKIE_NAME = 'cookiesAccepted';
