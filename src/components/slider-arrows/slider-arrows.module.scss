@@ -2,3 +2,10 @@
   display: flex;
   gap: 4px;
 }
+
+.arrow {
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+}
