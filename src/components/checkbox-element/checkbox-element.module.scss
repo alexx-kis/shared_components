@@ -1,0 +1,44 @@
+@use '../../../styles/abstracts/' as *;
+
+// ^======================== checkbox-element ========================^ //
+
+.checkbox-element {
+  display: grid;
+  grid-template-areas: 'checkbox legend' 'error error';
+  justify-content: start;
+  align-items: center;
+  column-gap: 12px;
+  height: auto;
+  padding: 0;
+  border: none;
+  border-radius: inherit;
+  background-color: transparent;
+  cursor: pointer;
+
+  .legend {
+    grid-area: legend;
+    color: var(--nutral100);
+    font-size: 16px;
+
+    @include MEDIA($MID_WIDTH) {
+      font-size: 14px;
+    }
+
+    &>div {
+      display: flex;
+      align-items: center;
+    }
+
+    a {
+      color: var(--blue50);
+    }
+  }
+}
+
+.checkbox {
+  grid-area: checkbox;
+}
+
+.error {
+  grid-area: error;
+}

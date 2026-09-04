@@ -1,32 +1,27 @@
 import clsx from 'clsx';
+import type { ChangeEvent } from 'react';
 import s from './checkbox.module.scss';
 
 // ^======================== Checkbox ========================^ //
 
-type CheckboxProps = {
+interface CheckboxProps {
   className?: string;
+  id: string;
   name: string;
   checked: boolean;
   errorMessage?: string;
-  onCheckboxChange: (value: boolean) => void;
-  icons: {
-    empty: string;
-    checked: string;
-  };
-};
+  icons: string[];
+  onCheckboxChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
 
-export default function Checkbox(checkboxProps: CheckboxProps): React.JSX.Element {
-  const { className, name, checked, errorMessage, onCheckboxChange, icons } = checkboxProps;
-  const iconSrc = checked ? icons.checked : icons.empty;
-
-  const handleCheckboxChange = () => onCheckboxChange(!checked);
+export default function Checkbox(props: CheckboxProps) {
+  const { className, id, name, checked, errorMessage, icons, onCheckboxChange } = props;
 
   return (
     <div className={clsx(className, s.checkbox, { [s._invalid]: errorMessage })}>
-      <label className={s.label}>
-        <input type='checkbox' name={name} onChange={handleCheckboxChange} />
-        <span className={s.icon} style={{ backgroundImage: `url(${iconSrc})` }}></span>
-      </label>
+      <input className={s.input} id={id} type='checkbox' name={name} checked={checked} onChange={onCheckboxChange} />
+
+      <div className={s.icon} style={{ backgroundImage: `url(${checked ? icons[1] : icons[0]})` }} />
     </div>
   );
 }
